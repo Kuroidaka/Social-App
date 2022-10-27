@@ -16,12 +16,13 @@ let Grid = require('gridfs-stream');
 const photoController = {
     upload:  async (req, res) => {
         if (req.file === undefined) return res.send("you must select a file.");
-        const imgUrl = `https://ct-social-app.herokuapp.com/file/${req.file.filename}`;
+        const port = 'https://ct-social-app.herokuapp.com' || 'http://localhost:8000'
+        const imgUrl = `${port}/file/${req.file.filename}`;
         return res.status(200).json(imgUrl);
     },
     getFile :async (req, res) => {
         try {
-            const readStream = fs.createReadStream(`./asserts/uploads/${req.params.filename}`)
+            const readStream = fs.createReadStream(`server/asserts/uploads/${req.params.filename}`)
             readStream.pipe(res);
         } catch (error) {
             res.send("not found");
