@@ -1,7 +1,6 @@
-const mongoose = require('mongoose')
 const File = require('../models/files')
 const fs = require('fs')
-let Grid = require('gridfs-stream');
+
 
 
 // let gfs;
@@ -16,7 +15,7 @@ let Grid = require('gridfs-stream');
 const photoController = {
     upload:  async (req, res) => {
         if (req.file === undefined) return res.send("you must select a file.");
-        const port = 'https://ct-social-app.herokuapp.com' || 'http://localhost:8000'
+        const port = process.env.PORT || 'http://localhost:8000'
         const imgUrl = `${port}/file/${req.file.filename}`;
         return res.status(200).json(imgUrl);
     },
