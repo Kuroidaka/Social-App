@@ -1,11 +1,14 @@
 {
   "name": "profile",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.9.0"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch server -- exec node server/index.js",
+    "start": "nodemon server/index.js",
     "server": "nodemon server/index.js",
     "client": "npm start --prefix client",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
@@ -19,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/idaka123/Social-App/issues"
   },
-  "homepage": "https://github.com/idaka123/Social-App#readme"
+  "homepage": "https://github.com/idaka123/Social-App#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20"
+  }
 }
