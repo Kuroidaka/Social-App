@@ -53,5 +53,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://git.heroku.com/ct-social-app.git"
+  "proxy": "https://ct-social-app.herokuapp.com/"
 }
