@@ -53,5 +53,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8000/"
+  "proxy": "https://fast-chamber-61473.herokuapp.com/"
 }
