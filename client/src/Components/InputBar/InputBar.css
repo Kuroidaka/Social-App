@@ -1,0 +1,66 @@
+
+:root{
+    --input-height: 45px
+}
+
+.input_bar-box{
+    margin: 20px 0;
+}
+
+.input_bar-wrapper{
+
+    width: 300px;
+    height: var(--input-height);
+    background-color: #fafafa;
+    border: 1px solid grey;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+
+}
+
+.input_bar-title{
+    color: white;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.input_bar{
+ height: 100%;
+ /* top: 0; */
+ /* position: relative; */
+ width: 100%;
+ border: none;
+ outline: none;
+ border-radius: 10px;
+ align-self: flex-end;
+ font-size: 15px;
+ padding: 10px;
+ padding-top: 20px;
+ background-color: transparent;
+}
+
+.input_bar-placeholder{
+    position: absolute;
+    top: calc(var(--input-height) / 2 );
+    transform: translateY(-50%);
+    left: 10px;
+    font-weight: 100;
+    color: rgb(128, 128, 128, 0.6);
+    background-color: transparent;
+    font-size: 15px;
+    transition: all linear .1s;
+    line-height: 1;
+}
+
+.input_bar:focus ~ .input_bar-placeholder {
+    font-size: 12px;
+    transform: translateY(0);
+    top: 1px;
+}
+
+.input_bar-wrapper input:not(:placeholder-shown) ~ .input_bar-placeholder{
+    font-size: 12px;
+    transform: translateY(0);
+    top: 1px;
+}

@@ -1,0 +1,87 @@
+.posts-content{
+    max-width: 468px;
+    width: 100%;
+    margin-bottom: 14px;
+}
+
+.posts-input-wrapper{
+    display: flex;
+    background-color: white;
+    background-color: #ffffff;
+    /* border: 1px solid; */
+    border-radius: 10px;
+    padding: 10px;
+    flex-direction: column;
+    box-shadow: rgb(17 17 26 / 5%) 0px 4px 16px, rgb(17 17 26 / 5%) 0px 8px 32px;
+}
+
+.posts-input-header{
+    display: flex;
+    align-items: center;
+    flex: 1 3;
+}
+
+.posts-avatar-wrapper{
+
+}
+
+.posts-avatar{
+    width: 40px;
+}
+
+.posts-input-content{
+    background-color: #dedbdb;
+    width: 90%;
+    height: 40px;
+    border-radius: 30px;
+    margin: 10px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 12px;
+
+}
+
+.posts-input-content:hover{
+    background-color: #d4d1d1;
+    cursor: pointer;
+}
+
+.posts-input {
+    color: grey;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 15px;
+    padding: 16px;
+}
+
+.posts-input-body{
+    display: flex;
+    justify-content: space-around;
+}
+
+.posts-input-fileImg{
+
+    display: flex;
+    align-items: center;
+    padding: 7px 26px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.posts-input-fileImg:hover{
+    background-color: rgba(212, 209, 209,0.5);
+}
+
+.posts-input-fileImg-icon{
+    padding-right: 9px;
+    font-size: 23px;
+    color: #2ec82e;
+}
+
+.posts-input-fileImg-name{
+
+    color: #c7c7c7;
+}
+

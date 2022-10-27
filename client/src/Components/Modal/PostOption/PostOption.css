@@ -1,0 +1,60 @@
+.post_option-overlay{
+    width: 100vw;
+    height: 100vh;
+    background: rgb(16 16 16 / 20%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+.post_option-body{
+    background-color: #242526;
+    z-index: 99;
+    height: auto;
+    max-width: 400px;
+    width: 100%;
+    position: fixed;
+    border-radius: 10px;
+    top: 20vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.post_option-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+}
+.post_option-item-btn{
+    width: 100%;
+    height: 100%;
+    padding: 10px 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.post_option-item + .post_option-item {
+    border-top: 1px solid rgb(240, 240, 240);
+}
+
+.post_option-content{
+    color: white;
+    font-size: 16.8px;
+    font-weight: 800;
+}
+
+.post_option-content{
+
+}
+
+.post_option-item{
+
+}

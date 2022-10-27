@@ -1,0 +1,160 @@
+.PubPost{
+    height: auto;
+
+    border-radius: 10px;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 468px;
+    box-shadow: rgb(17 17 26 / 5%) 0px 4px 16px, rgb(17 17 26 / 5%) 0px 8px 32px;
+}
+
+
+.PubPost + .PubPost {
+    margin-top: 13px;
+}
+
+.PubPost_header{
+    display: flex;
+    background-color: #FFFF;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px;
+}
+
+.PubPost_header-user-info{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.PubPost_header-avatar{
+    width: 40px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.PubPost_header-name-wrapper {
+    padding-left: 10px;
+}
+
+.PubPost_header-name{
+    font-weight: 600;
+
+}
+
+.PubPost_header-timer{
+    font-size: 13px;
+    font-weight: 100;
+    color: #b7b7b7;
+    letter-spacing: 0px;
+}
+
+.PubPost_header-option-icon{
+    font-size: 20px;
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+.PubPost_content{
+
+}
+
+.PubPost_content-img{
+    width: 100%;
+    height: 506px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.PubPost_footer {
+    height: auto;
+    background-color: white;
+    border-bottom-left-radius: 10px ;
+    border-bottom-right-radius: 10px ;
+    
+}
+
+.PubPost_footer-icon-block{
+    display: flex;
+    padding: 0 3px;
+    justify-content: flex-start;
+}
+.PubPost_footer-icon{
+    font-size: 25px;
+    padding: 8px;
+    cursor: pointer;
+    /* transition: all linear .4s; */
+}
+
+/* .PubPost_footer-icon:hover{
+    opacity: 0.5;
+} */
+
+.PubPost_footer-icon.heart.active{
+    color: #ED4956;
+}
+
+.PubPost_footer-icon.comment{
+
+}
+
+.PubPost_footer-icon-heart{
+
+}
+
+.PubPost_footer-des-block{
+
+}
+
+.PubPost_footer-des{
+    padding: 5px 10px 15px;
+    background-color: #FFFF;
+
+}
+
+.PubPost_footer-comment-block-wrapper{
+    border-top: 1px solid #f0f0f0;
+}
+
+.PubPost_footer-comment-block{
+    padding: 10px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.PubPost_footer-comment-icon{
+    font-size: 24px;
+}
+
+
+.PubPost_footer-comment-input{
+    width: 80%;
+    height: 34px;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    padding: 0 12px;
+}
+
+.PubPost_footer-comment-btn{
+    outline: none;
+    border: none;
+    background: transparent;
+    /* color: #358bcc; */
+    color: #0091ff;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 15px;
+    margin-right: 6px;
+
+}
+
+input:not(:placeholder-shown) ~ .PubPost_footer-comment-btn{
+    color: #358bcc;
+}
+

@@ -1,0 +1,40 @@
+
+.Button{
+    margin: 0 5px;
+}
+
+.btn-default{
+    max-width: 100%;
+    width: 100px;
+    height: 36px;
+    border-radius: 20px;
+    border: 2px solid #7ec7ff;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color ease-in-out 200ms;
+}
+
+.btn-default:hover{
+    background-color: rgb(227 227 227 / 60%);
+
+}
+
+.btn-primary{
+    max-width: 100%;
+    width: 100px;
+    height: 36px;
+    border-radius: 20px;
+    border: none;
+    background-color: #0091ff;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color ease-in-out 200ms;
+}
+
+.btn-primary:hover {
+    
+}

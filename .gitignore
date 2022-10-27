@@ -1,0 +1,7 @@
+node_modules
+env.js
+tmp
+package-lock.json
+build
+.vscode/
+.DS_Store
