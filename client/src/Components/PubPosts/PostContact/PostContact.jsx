@@ -23,7 +23,7 @@ const PostContact = (props) => {
         ? (setLikeCount(prev => --prev ) )
         : setLikeCount(prev => ++prev ) 
         setHeartClick(!heartClick)
-        await axios.post(`post/like/${post._id}?count=${likeCount}&userId=${currentUser._id}`)
+        await axios.post(`/post/like'${post._id}?count=${likeCount}&userId=${currentUser._id}`)
     }
 
     return( 
