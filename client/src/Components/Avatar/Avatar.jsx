@@ -2,7 +2,7 @@ import './Avatar.css'
 
 const Avatar = (props) => {
     const { src, classStyles, width } = props
-    return (  
+    return (    
         <div className={`avatar-wrapper ${classStyles}`}>
             <img src={src} style={{width: width}} className="avatar" alt="" />
         </div>

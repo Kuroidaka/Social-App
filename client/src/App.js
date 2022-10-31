@@ -12,6 +12,10 @@ import RegisterModal from './Components/Modal/Register/RegisterModal';
 import Chat from './Pages/Chat/Chat';
 import Home from './Pages/Home/Home';
 import Profile from './Pages/Profile/Profile';
+import LoginPage from './Pages/login/Login'
+import MainHeader from './Components/HeaderBar';
+import HeaderLayout from './layouts/HeaderLayout';
+import AuthPage from './Pages/login/AuthPage';
 // import ProfileWrap from './Pages/Profile/ProfileWrap';
 
 export const UserContext = createContext()
@@ -26,36 +30,40 @@ function App() {
  
   return (
    <Router> 
-
     {/* NAV BAR */}
-      {logModal && !registerModal && <LoginModal 
-                                        setLogModal={setLogModal} 
-                                        setRegisterModal={setRegisterModal} />}
-      {registerModal && !logModal && <RegisterModal 
-                                        setRegisterModal={setRegisterModal}
-                                        setLogModal={setLogModal} />}
-     <header className='main-header'>                                  
-        {currentUser? <HLoggedIn />:<HBar 
-                                  setRegisterModal={setRegisterModal} 
-                                  setLogModal={setLogModal}/>}
-
-     </header>
+     
+     {logModal && !registerModal && 
+      <LoginModal setLogModal={setLogModal} setRegisterModal={setRegisterModal} />}
+      
+      {registerModal && !logModal && 
+      <RegisterModal setRegisterModal={setRegisterModal} setLogModal={setLogModal} />}
+    
+    {/* <MainHeader setRegisterModal={setRegisterModal} setLogModal={setLogModal}/>  */}
+    {/* <header className='main-header'>                                  
+        {currentUser ? <HLoggedIn /> :<HBar setRegisterModal={setRegisterModal} setLogModal={setLogModal}/>}
+     </header> */}
 
       <div className='App'>
+          <Routes>  
+                <Route path='/login' element={<AuthPage />} />
 
-
-          <Routes>
-            <Route path='/' element={<Home users={users}/>} />
-            <Route path={`/chat`} element={<Chat />} />
+                <Route path='/' element={<HeaderLayout>
+                                            <Home users={users}/>
+                                        </HeaderLayout>} />
+                <Route path={`/chat`} element={<HeaderLayout>
+                                                  <Chat />
+                                              </HeaderLayout>} />
             {users.map((user, idx) => {
               const value = {user}
               return(<Route 
                       key={idx}
                       path={`/Profile/${user._id}`} 
                       element={
-                              <UserContext.Provider value={value}>
-                                  <Profile id={user._id} />
-                              </UserContext.Provider>
+                              <HeaderLayout>
+                                <UserContext.Provider value={value}>
+                                    <Profile id={user._id} />
+                                </UserContext.Provider>
+                              </HeaderLayout>
                               } 
                       />)})}
             {/* {users.map((user) => {

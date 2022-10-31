@@ -31,8 +31,8 @@ export const updateUserInfo = async (userUpdated, dispatch, id, accessToken) => 
 export const register = async (user, dispatch) => {
     dispatch(registerStart())
     try{
-        await axios.post('/authem/register', user)
-        dispatch(registerSuccess())
+        // await axios.post('/authem/register', user)
+        // dispatch(registerSuccess())
         // navigate('/')
     }
     catch{
@@ -41,19 +41,22 @@ export const register = async (user, dispatch) => {
 }
 
 export const login = async (res, dispatch, navigate) => {
-        dispatch(loginSuccess(res.data))
+        await dispatch(loginSuccess(res.data))
+     
 }
 
 export const LogOut = async (dispatch, id, accessToken, navigate) => {
     dispatch(logOutStart())
     try{
-        const res = await axios.post('/authem/logout/'+id,
+        await axios.post('/authem/logout/'+id,
         {
             headers: { token: `Bearer ${accessToken}` }
-        })       
+        })
+        .then(()=> {dispatch(logOutSuccess())})       
+        .then(()=> {navigate('/login')})
         
-        dispatch(logOutSuccess())
-        window.location.reload()
+        
+        
     }
     catch{
         dispatch(logOutError())

@@ -1,0 +1,250 @@
+.wrapper{
+    background-image: url('../../assert/img/background.webp');
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+}
+
+// LOGIN
+.Login_modal-wrapper{
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+
+.Login_modal-overlay{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 100vw;
+    height: 100vh;
+    background: rgb(16 16 16 / 20%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+
+}
+
+.Login_modal{
+    background-color: #90c8ff;
+    z-index: 99;
+    height: auto;
+    max-width: 500px;
+    width: 100%;
+    position: fixed;
+    border-radius: 10px;
+    top: 20vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding-bottom: 24px;
+}
+
+.Login_modal-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.Login_modal-close_btn{
+    color: white;
+}
+
+.Login_modal-title{
+    color: white;
+    font-size: 24px;
+    letter-spacing: 3px;
+}
+
+.Login_modal-body{
+    padding: 20px 20px 0;
+}
+
+.Login_modal-icon-box{
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Login_modal-login_btn {
+    
+}
+
+.Login_modal-notify{
+    display: flex;
+    justify-content: flex-start;
+    align-self: center;
+    padding: 0px 22px 21px;
+}
+
+.Login_modal-notify-content{
+    color: #ff3434;
+}
+
+
+// REGISTER
+
+
+
+.Register_modal-wrapper{
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+
+.Register_modal-overlay{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 100vw;
+    height: 100vh;
+    background: rgb(16 16 16 / 20%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+
+}
+
+.Register_modal{
+    background-color: #90c8ff;
+    z-index: 99;
+    height: auto;
+    max-width: 400px;
+    width: 100%;
+    position: fixed;
+    border-radius: 10px;
+    top: 20vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding-bottom: 24px;
+}
+
+.Register_modal-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.Register_modal-close_btn{
+    color: white;
+}
+
+.Register_modal-title{
+    color: white;
+    font-size: 24px;
+    letter-spacing: 3px;
+}
+
+.Register_modal-body{
+    padding: 20px;
+}
+
+.Register_modal-icon-box{
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.register-zone{
+
+    padding: 35px 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.sign_up-btn{
+    text-decoration: underline;
+    color: blue;
+    margin-left: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.page-loading{
+    // background-color: rgb(0 0 0 / 40%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    position: relative;
+    height: 100vh;
+    z-index: 99;
+}
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ellipsis div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #65ccff;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+
+
+  .lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+  @keyframes lds-ellipsis1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes lds-ellipsis3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes lds-ellipsis2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
+  }
+  
