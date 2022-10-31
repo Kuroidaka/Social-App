@@ -11,7 +11,6 @@ const NewFeed = (props) => {
     const { id, home , post } = props
     const [posts, setPosts] = useState([])
     const [pending, setPending] = useState(true)
-    console.log('transfer to props', post);
     const getPosts = async () => {
         setPending(true)
         if(home){
@@ -27,7 +26,6 @@ const NewFeed = (props) => {
         }
     }
     useEffect(() => {
-        console.log('get posts');
         getPosts()
     }, []) 
 

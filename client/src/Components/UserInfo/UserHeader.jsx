@@ -13,8 +13,7 @@ import UserAbout from './UserAbout';
 
 
 function Header(props) {
-    const { edit, setEdit } = props
-    const { user } = useContext(UserContext)
+    const { edit, setEdit, user } = props
     const currentUser = useSelector(state => state.auth?.login?.currentUser)
     let ownUser = true
     if(currentUser?._id !== user._id) {

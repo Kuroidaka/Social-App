@@ -10,7 +10,7 @@ import Input from '../../InputInfo/Input'
 import { UserContext } from '../../../App'
 
 function EditModal(props) {
-  const {check, setCheck, setEdit } = props
+  const {check, setCheck, setEdit, setLoad } = props
   const { user } = useContext(UserContext)
   const currentUser = useSelector(state => state.auth.login.currentUser)
   const [selectIdx, setSelectIdx] = useState('')
@@ -54,6 +54,7 @@ function EditModal(props) {
   const handleSubmit = async (e) => {
     // e.preventDefault()
     setEdit(false)
+    setLoad(true)
     const userUpdated = {
       name: name,
       liveIn: liveIn,
@@ -65,8 +66,8 @@ function EditModal(props) {
 
     await axios.post(`/post/changePost?userId=${currentUser._id}`, userUpdated)
     .then(() => {updateUserInfo(userUpdated, dispatch, user?._id, user?.accessToken)})
-    .then(() => {setCheck(!check)})
-    .catch((error)=> {console.log(error);})
+    .then(() => {setCheck(!check); setLoad(false)})
+    .catch((error)=> {console.log(error); setLoad(false)})
 
   }
 
