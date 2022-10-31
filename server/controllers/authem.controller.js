@@ -89,10 +89,6 @@ const authemControllers = {
                     sameSite: 'strict'
                 })
 
-                
-                // remove password from object
-                // const { password, ...other } = user._doc
-                
                 await User.updateOne({username: req.body.username}, {$set:{ accessToken: accessToken}})
                 
                 const newUser = await User.find({username: req.body.username})

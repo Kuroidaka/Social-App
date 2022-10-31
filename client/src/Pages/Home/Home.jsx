@@ -3,6 +3,7 @@ import { useDispatch} from "react-redux";
 import NewFeed from "../../Components/NewFeed/NewFeed";
 import UserItem from "../../Components/UserItem/UserItem";
 import { AllUsers } from "../../redux/requestApi";
+import Posts from '../../Components/CreatePosts/Posts'
 import './Home.css'
 
 const Home = (props) => {
@@ -19,6 +20,8 @@ const Home = (props) => {
 
             
             <div className="home-posts">
+                {/* <Posts ownUser={true}/> */}
+
                 <NewFeed home/>
             </div>
 

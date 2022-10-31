@@ -23,7 +23,7 @@ const PostContact = (props) => {
         ? (setLikeCount(prev => --prev ) )
         : setLikeCount(prev => ++prev ) 
         setHeartClick(!heartClick)
-        await axios.post(`/post/like'${post._id}?count=${likeCount}&userId=${currentUser._id}`)
+        await axios.post(`/post/like/${post._id}?count=${likeCount}&userId=${currentUser._id}`)
     }
 
     return( 
@@ -33,7 +33,7 @@ const PostContact = (props) => {
                     className={`PubPost_footer-icon heart ${heartClick && 'active'}`} 
                     onClick={handleHeartClick} 
                     icon={heartClick? HeartClicked : Heart} />
-                {/* <i class="fa-solid fa-heart"></i> */}
+
                 <FontAwesomeIcon className="PubPost_footer-icon comment" icon={faComment} />
             </div>
 

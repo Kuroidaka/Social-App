@@ -12,6 +12,8 @@ router.delete('/deletePost/:userId/:postId/:postUserId', middlewareController.ve
 router.get('/getAll', postControllers.getAllPost)
 router.get('/get/:userId', postControllers.getByUser)
 router.post('/like/:postId', postControllers.like)
+router.post('/changePost', postControllers.changeAvatarPost)
+
 
 
 module.exports = router

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 
 import './edit.css'
 import { updateUserInfo } from '../../../redux/requestApi'
@@ -9,8 +10,9 @@ import Input from '../../InputInfo/Input'
 import { UserContext } from '../../../App'
 
 function EditModal(props) {
-  const { setEdit } = props
+  const {check, setCheck, setEdit } = props
   const { user } = useContext(UserContext)
+  const currentUser = useSelector(state => state.auth.login.currentUser)
   const [selectIdx, setSelectIdx] = useState('')
   const picColorRef = useRef()
   const dispatch = useDispatch()
@@ -49,8 +51,8 @@ function EditModal(props) {
     setEdit(false)
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    // e.preventDefault()
     setEdit(false)
     const userUpdated = {
       name: name,
@@ -60,10 +62,12 @@ function EditModal(props) {
       avatarUrl: avaUrl,
       theme: theme,
     }
-    
-    if(user?.accessToken){
-      updateUserInfo(userUpdated, dispatch, user?._id, user?.accessToken)
-    }
+
+    await axios.post(`/post/changePost?userId=${currentUser._id}`, userUpdated)
+    .then(() => {updateUserInfo(userUpdated, dispatch, user?._id, user?.accessToken)})
+    .then(() => {setCheck(!check)})
+    .catch((error)=> {console.log(error);})
+
   }
 
   useEffect(() => {

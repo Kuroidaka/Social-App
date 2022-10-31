@@ -1,15 +1,13 @@
 import { useSelector } from 'react-redux'
 import './post.css'
-import { useContext } from 'react'
-import { UserContext } from '../../App'
 
 const Posts = (props) => {
-    const { setModalPost } = props
-    const { user } = useContext(UserContext)
+    const { setModalPost , user } = props
+
     const currentUser = useSelector(state => state.auth.login?.currentUser)
     let ownUser = true
 
-    if(currentUser?._id !== user._id) {
+    if(currentUser?._id !== user?._id) {
         ownUser = false
     }
     const handleInputClick = () => {

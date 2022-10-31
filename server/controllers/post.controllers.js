@@ -60,7 +60,21 @@ const postControllers = {
         } catch (error) {
             console.log(error);
         }        
-    }
+    },
+    changeAvatarPost: async(req, res) => {
+        try {
+            const post = await Post.updateMany(
+                { userId: req.query.userId },
+                { 
+                    name: req.body.name,
+                    avatarUrl: req.body.avatarUrl
+                }
+            )
+            res.status(200).json(post);
+        } catch (error) {
+            console.log(error);
+        }
+    }   
 
 }
 

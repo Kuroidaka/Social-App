@@ -46,7 +46,10 @@ const ModalPost = (props) => {
 
         }
 
-        await Post(dispatch, userId, newPost, formData).then()
+        await Post(dispatch, userId, newPost, formData)
+        .then(()=> {
+            window.location.reload()
+        })
         .catch(console.log('POST FAILURE'))
       
     }
