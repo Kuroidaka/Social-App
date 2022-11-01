@@ -6,7 +6,7 @@ const InputBar = (props) => {
     return ( 
         <div className='input_bar-box'>
             <div className="input_bar-wrapper" style={{width: width}}>
-                <input type={type} className="input_bar" onChange={onChange} placeholder=' ' />
+                <input type={type} autoComplete="new-password" className="input_bar" onChange={onChange} placeholder=' ' />
                 <h5 className="input_bar-placeholder">{placeholder}</h5>
 
             </div>

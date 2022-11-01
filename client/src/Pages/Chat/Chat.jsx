@@ -1,6 +1,8 @@
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 import classNames from "classnames/bind";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -12,10 +14,8 @@ import UserSide from "./UserSide";
 const cx = classNames.bind(styles)
 
 const Chat = (props) => {
-    const { user } = props
-    const currentUser = useSelector(state => state.auth.login?.currentUser)
-
-    const users = currentUser.chat
+    const { users } = props
+    // const currentUser = useSelector(state => state.auth.login?.currentUser)
 
     return (  
 

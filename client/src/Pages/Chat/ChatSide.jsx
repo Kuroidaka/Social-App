@@ -34,7 +34,7 @@ const ChatSide = () => {
 
                 <div className={cx("other-chat")}>
                     <div className={cx("chat-content-wrapper")}>
-                        <div className={cx("chat-content")}>dạo này trình giao tiếp dasdascủdawlkdmlkawm dklawml kdmawlk malwm lkdawmlk dawmkl admwla m sao r</div>
+                        <div className={cx("chat-content")}>dạo này trình giao tiếp  m sao r</div>
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@ const ChatSide = () => {
 
                 <div className={cx("other-chat")}>
                     <div className={cx("chat-content-wrapper")}>
-                        <div className={cx("chat-content")}>dạo này trình giao tiếp dasdascủdawlkdmlkawm dklawml kdmawlk malwm lkdawmlk dawmkl admwla m sao r</div>
+                        <div className={cx("chat-content")}>dạo này trình giao tiếp \awlk malwm lkdawmlk dawmkl admwla m sao r</div>
                     </div>
                 </div>
             

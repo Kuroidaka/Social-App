@@ -22,27 +22,12 @@ export const UserContext = createContext()
 
 function App() {
   const currentUser = useSelector(state => state.auth.login?.currentUser )
-  // const getUser = useSelector(state => state.auth.user?.getUser)
-  const [logModal, setLogModal] = useState(false)
-  const [registerModal, setRegisterModal] = useState(false)
-  
   const users = useSelector(state => state.user.allUser)
  
   return (
    <Router> 
     {/* NAV BAR */}
      
-     {logModal && !registerModal && 
-      <LoginModal setLogModal={setLogModal} setRegisterModal={setRegisterModal} />}
-      
-      {registerModal && !logModal && 
-      <RegisterModal setRegisterModal={setRegisterModal} setLogModal={setLogModal} />}
-    
-    {/* <MainHeader setRegisterModal={setRegisterModal} setLogModal={setLogModal}/>  */}
-    {/* <header className='main-header'>                                  
-        {currentUser ? <HLoggedIn /> :<HBar setRegisterModal={setRegisterModal} setLogModal={setLogModal}/>}
-     </header> */}
-
       <div className='App'>
           <Routes>  
                 <Route path='/login' element={<AuthPage />} />
@@ -67,7 +52,7 @@ function App() {
                               } 
                       />)})}
             {/* {users.map((user) => {
-              return (<Route path={`/chat`} element={<Chat users={users} user={user}/>} />)
+              return (<Route path={`/chat`} element={<Chat/>} />)
             })} */}
 
 
