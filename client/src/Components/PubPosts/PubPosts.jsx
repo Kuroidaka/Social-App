@@ -16,6 +16,10 @@ const PubPost = (props) => {
     const [modalOption, setModalOption] = useState(false)
     const currentUser = useSelector(state => state.auth.login?.currentUser )
 
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
+
         const date = post.createdAt.split('T')[0].split('-')
         const time = post.createdAt.split('T')[1].split(':')
         const today = new Date()
@@ -40,7 +44,8 @@ const PubPost = (props) => {
             
         } 
         else if(postTime.month !== currentTime.month){
-            timer =  `${currentTime.month - postTime.month} month`
+            timer =  `${postTime.date} ${monthNames[postTime.month-1]}`
+            console.log(postTime.month);
         } 
         else if(postTime.date !== currentTime.date){
             let tmp = currentTime.date - postTime.date
@@ -96,7 +101,7 @@ const PubPost = (props) => {
                     </p>
                 </div>
                 }
-              <img src={post.imgUrl} alt="" className="PubPost_content-img" />
+             {post.imgUrl && <img src={post.imgUrl} alt="" className="PubPost_content-img" />}
 
             <div className='PubPost_footer'>
                     <PostContact post={post}/>

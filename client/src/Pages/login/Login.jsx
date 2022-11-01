@@ -12,10 +12,9 @@ import styles from './Login.module.scss'
 const cx = classNames.bind(styles)
 
 const LoginPage = (props) => {
-    const {log, setLog, setLoad}= props
+    const {log, setLog, setLoad, state, setState}= props
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
-    const [state, setState] = useState(true)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -29,17 +28,20 @@ const LoginPage = (props) => {
         await axios.post('/authem/login', newUser)
         .then((res) => {
             login(res, dispatch, navigate)
-            setState(true)
         })
-        .then(()=> {
+        .then(() => {
             navigate('/')
             setLoad(false)
         })
         .catch(err => {
             setLoad(false)
+            
+        })
+        .finally(() => {
             setState(false)
         })
-
+      
+       
     }
 
     return ( 
@@ -60,7 +62,7 @@ const LoginPage = (props) => {
                         type='password'/>
                 </div>
 
-                {!state && <div className={cx("Login_modal-notify")}>
+                {!state && <div className={cx("Login_modal-notify")} >
                     <p className={cx("Login_modal-notify-content")}>username or password is not correct</p>
                 </div>}
 
@@ -70,7 +72,7 @@ const LoginPage = (props) => {
 
                 <div className={cx("register-zone")}>
                   Not a member?<div className={cx("sign_up-btn")} 
-                    onClick={()=> {setLog(!log)}} >  Sign up now</div>
+                    onClick={()=> {setLog(!log)}} >Sign up now</div>
                 </div>
                
             </form>

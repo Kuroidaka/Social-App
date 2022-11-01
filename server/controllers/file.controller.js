@@ -14,10 +14,12 @@ const fs = require('fs')
 
 const photoController = {
     upload:  async (req, res) => {
-        if (req.file === undefined) return res.send("you must select a file.");
-        const port = process.env.PORT || 'http://localhost:8000'
-        const imgUrl = `${port}/file/${req.file.filename}`;
-        return res.status(200).json(imgUrl);
+        if (req.file !== undefined) {
+            const port = process.env.PORT || 'http://localhost:8000'
+            const imgUrl = `${port}/file/${req.file.filename}`;
+            return res.status(200).json(imgUrl);
+        }
+        else return
     },
     getFile :async (req, res) => {
         try {

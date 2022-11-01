@@ -80,17 +80,17 @@ export const getUser = async (dispatch, id) => {
 export const Post = async (dispatch, userId, newPost, formData) => {
     // dispatch(createPostStart())
     try{
+        await console.log(formData.file);
+            const resFile = await axios.post(`/file/upload/`, formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+            })
+            newPost = { ...newPost, imgUrl: resFile.data }
         
-        const resFile = await axios.post(`/file/upload/`,formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-        })
-        newPost = { ...newPost, imgUrl: resFile.data }
-        console.log(newPost);
-        const res = await axios.post('/post/createPost/'+ userId, newPost)
+    const res = await axios.post('/post/createPost/'+ userId, newPost)
 
-        await dispatch(createPost(res.data))
+    await dispatch(createPost(res.data))
     }
     catch{
         // dispatch(createPostError())

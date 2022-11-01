@@ -9,6 +9,7 @@ const cx = classNames.bind(styles)
 const AuthPage = () => {
     const [log, setLog] = useState(true)
     const [load, setLoad] = useState(false)
+    const [state, setState] = useState(true)
 
     return ( 
         <div className={cx('wrapper')}>
@@ -18,7 +19,7 @@ const AuthPage = () => {
                     <div className={cx("lds-ellipsis")}><div></div><div></div><div></div><div></div></div>
             </div> 
             :(log
-                ? <LoginPage log={log} setLog={setLog} setLoad={setLoad}/>
+                ? <LoginPage log={log} setLog={setLog} setLoad={setLoad} state={state} setState={setState}/>
                 : <RegisterPage log={log} setLog={setLog} setLoad={setLoad}/>
             )
             }

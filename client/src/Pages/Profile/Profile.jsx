@@ -30,6 +30,7 @@ const Profile = (props) => {
         setLoad(true)
         axios.get(`/post/get/${id}`)
         .then((res) => {
+            console.log('get user');
             setPosts(res.data)
             setLoad(false)
         })
@@ -47,9 +48,8 @@ const Profile = (props) => {
                     <div className={cx("lds-ellipsis")}><div></div><div></div><div></div><div></div></div>
                 </div> 
             }
-
             {
-                currentUser
+                currentUser._id === user._id
                 ?<Header edit={edit} setEdit={setEdit} user={currentUser}/>
                 :<Header edit={edit} setEdit={setEdit} user={user}/>
             }
@@ -58,7 +58,7 @@ const Profile = (props) => {
 
            <div className={cx('grid')}>
                 {modalPost && <ModalPost setModalPost={setModalPost}/>}
-                { currentUser
+                { currentUser._id === user._id
                     ?<Posts setModalPost={setModalPost} user={currentUser}/>
                     :<Posts setModalPost={setModalPost} user={user}/>}
                 {posts && <NewFeed id={id} home={false} post={posts}/>}

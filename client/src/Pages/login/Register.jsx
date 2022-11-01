@@ -1,6 +1,6 @@
 import axios from "axios"
 import classNames from "classnames/bind"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Navigate } from "react-router-dom"
 
@@ -17,23 +17,41 @@ const RegisterPage = (props) => {
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const refName = useRef()
+    const refUserName = useRef()
+    const refPd = useRef()
     const dispatch = useDispatch()
 
     const handleSubmitRegister = async (e) => {
         e.preventDefault()
-        setLoad(true)
-        const  newUser = {
-            name: name,
-            username: username,
-            password: password
+
+        if(!name || !username || !password){
+            if(!name) {
+                refName.current.style.border = '1.5px solid red'
+            }
+            if(!username) {
+                refUserName.current.style.border = '1.5px solid red'
+            }
+            if(!password) {
+                refPd.current.style.border = '1.5px solid red'
+            }
         }
-        await axios.post('/authem/register', newUser)
-        .then(() => {dispatch(registerSuccess())})
-        .then(() => {
-            setLog(!log)
-            setLoad(false)
-        }) 
-        .catch(() => {setLoad(false)})
+       else {
+            setLoad(true)
+            const  newUser = {
+                name: name,
+                username: username,
+                password: password
+            }
+            await axios.post('/authem/register', newUser)
+            .then(() => {dispatch(registerSuccess())})
+            .then(() => {
+                setLog(!log)
+                setLoad(false)
+            }) 
+            .catch(() => {setLoad(false)})
+       }
+        
 
     }
 
@@ -45,14 +63,19 @@ const RegisterPage = (props) => {
                 </header>
                 <div className={cx("Register_modal-body")}>
                     <InputBar
+                        ref={refName}
                         placeholder='Name' 
                         width='100%'
-                        onChange={(e)=>setName(e.target.value)}/>
+                        onChange={(e)=>setName(e.target.value)}
+                        />
                     <InputBar 
+                        ref={refUserName}
                         placeholder='Username' 
                         width='100%'
-                        onChange={(e)=>setUsername(e.target.value)}/>
+                        onChange={(e)=>setUsername(e.target.value)}
+                        />
                     <InputBar 
+                        ref={refPd}
                         placeholder='Password'
                         width='100%' 
                         onChange={(e)=>setPassword(e.target.value)}

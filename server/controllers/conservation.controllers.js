@@ -23,13 +23,9 @@ const conservationController = {
           }
           )
         }
-        console.log(userUpdate);
 
         return res.status(200).json(userUpdate)
         
-
-       
-
       } catch (error) {
         console.log(error);
       }

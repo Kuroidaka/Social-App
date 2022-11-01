@@ -22,15 +22,6 @@ const Popper = (props) => {
         
     }
 
-    // const handleClickOutside = (e) => {
-    //     const { target } = e
-    // //    if (!this.wrapperRef.current.contains(target)) {
-    // //      alert('you clicked outside!')
-    // //    }
-    //     console.log(target)
-    // }
-
-
     return ( 
         <div className="popper">
 

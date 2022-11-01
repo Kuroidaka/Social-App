@@ -9,10 +9,13 @@ const PostOption = (props) => {
     const user = useSelector(state => state.auth?.login?.currentUser)
     
     const handleDelete = async (e) => {
-        // e.preventDefault()
-        await axios.delete(`/post/deletePost/${user._id}/${post._id}/${post.userId}` )
-        setModalOption(false)
-
+        e.preventDefault()
+        await axios.delete(`/post/deletePost/${user._id}/${post._id}/${post.userId}`)
+        .then(() => {
+            setModalOption(false)
+            window.location.reload()
+        })
+        
     }
 
     const handleEdit = (e) => {
