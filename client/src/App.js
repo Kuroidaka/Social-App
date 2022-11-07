@@ -51,10 +51,7 @@ function App() {
                               </HeaderLayout>
                               } 
                       />)})}
-            {/* {users.map((user) => {
-              return (<Route path={`/chat`} element={<Chat/>} />)
-            })} */}
-
+            <Route path={`/chat`} element={<Chat users={users}/>} />
 
           </Routes>
             

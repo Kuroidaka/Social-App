@@ -30,8 +30,6 @@ const SearchBar = () => {
         
         if (!deBounce.trim()) return
         setLoad(true)
-
-
         const fetchApi = async () => {
             try {
                 const result = await axios.get(`/user/search`, {

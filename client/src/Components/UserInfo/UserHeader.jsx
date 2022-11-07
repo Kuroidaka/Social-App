@@ -15,6 +15,7 @@ import UserAbout from './UserAbout';
 function Header(props) {
     const { edit, setEdit, user } = props
     const currentUser = useSelector(state => state.auth?.login?.currentUser)
+    const navigate = useNavigate()
     let ownUser = true
     if(currentUser?._id !== user._id) {
       ownUser = false
@@ -25,16 +26,14 @@ function Header(props) {
 
     const handleMes = async (e) => {
       e.preventDefault()
-      const res = await axios.post(`/chat/${user._id}?id=${currentUser._id}`)
-      console.log(res);
-      // await navigate(`/chat/`)
+      // const res = await axios.post(`/chat/${user._id}?id=${currentUser._id}`)
+      navigate(`/chat`)
     }
 
   return (
     <header>
       
       <div className="header-wrapper" style={{ backgroundImage: `linear-gradient(${user.info.theme} 20%, white 100%)` }}>
-      
 
         <div className="user">
             <div className="img-wrapper">
@@ -70,7 +69,9 @@ function Header(props) {
       </div>
 
 
-      {(user.info.about || user.info.liveIn || user.info.comeFrom )&& <UserAbout />}
+      { currentUser?._id === user._id 
+      ? <UserAbout user={currentUser}/>
+      : <UserAbout user={user}/>}
 
     </header>
   )

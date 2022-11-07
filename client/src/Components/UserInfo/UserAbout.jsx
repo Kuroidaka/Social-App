@@ -7,8 +7,8 @@ import { UserContext } from '../../App';
 
 import './User.css'
 
-const UserAbout = () => {
-    const { user } = useContext(UserContext)
+const UserAbout = (props) => {
+    const { user } = props
     return ( 
         <div className='user-about-box-wrapper'>
             <div className='user-about-box'>

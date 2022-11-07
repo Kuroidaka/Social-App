@@ -29,11 +29,56 @@
 
     .username{}
 }
+
+.search_user{
+    margin: 10px 12px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #EFEEEF;
+}
+.search_user-input{
+
+    width: 90%;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid black;
+    border: none;
+    margin: 0 10px;
+    background-color: transparent;
+    outline: none;
+}
+
 .user-list{
     list-style-type: none;
     height: 71vh;
     width: 100%;
     overflow-y: auto;
+}
+
+.user-item-tiny{
+    display: flex;
+    align-self: center;
+    padding: 8px 22px;
+
+    .user-item-avatar{
+        width: 38px;
+        border-radius: 50%;
+    }
+
+    .user-item-info{
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .user-item-name{
+        font-weight: 400;
+    }
+    .last-mes{
+        font-weight: 200;
+        opacity: 0.7;
+        color: #8E8D8E;
+    }
 }
 
 .user-item{

@@ -51,7 +51,6 @@ const RegisterPage = (props) => {
             }) 
             .catch(() => {setLoad(false)})
        }
-        
 
     }
 

@@ -13,7 +13,7 @@ import { UserContext } from '../../../App'
 const ModalPost = (props) => { 
     const { setModalPost} = props
     const [importImg, setImportImg] = useState(false)
-    const { user} = useContext(UserContext)
+    const user  = useSelector(state => state.auth.login.currentUser)
     const userId = user?._id
     const avatarUrl = user?.info.avatarUrl
     const name = user?.info.name

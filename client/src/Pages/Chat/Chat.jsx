@@ -1,10 +1,6 @@
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
+
 import classNames from "classnames/bind";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 // import { Routes, Route } from 'react-router-dom'
 
@@ -15,14 +11,15 @@ const cx = classNames.bind(styles)
 
 const Chat = (props) => {
     const { users } = props
+    const [chatList, setChatList] = useState([])
+    const [currentChat, setCurrentChat] = useState()
     // const currentUser = useSelector(state => state.auth.login?.currentUser)
-
     return (  
 
             <div className={cx("chat-box-page")}>
                 <div className={cx("chat-box")}>
-                    <UserSide users={users}/>
-                    <ChatSide />
+                    <UserSide setCurrentChat={setCurrentChat} users={users} chatList={chatList} setChatList={setChatList}/>
+                    <ChatSide currentChat={currentChat}/>
                 </div>
             </div>
 
