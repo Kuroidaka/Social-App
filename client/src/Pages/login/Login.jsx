@@ -8,6 +8,9 @@ import Button from "../../Components/Button/Button"
 import InputBar from "../../Components/InputBar/InputBar"
 import { login } from "../../redux/requestApi"
 import styles from './Login.module.scss'
+import { io } from "socket.io-client"
+import { CONNECTIONPORT } from "../../config"
+import { Socket } from '../../services/socket'
 
 const cx = classNames.bind(styles)
 
@@ -28,9 +31,12 @@ const LoginPage = (props) => {
         await axios.post('/authem/login', newUser)
         .then((res) => {
             login(res, dispatch, navigate)
+            return res.data
         })
-        .then(() => {
+        .then((data) => {
             navigate('/')
+  
+            // socket.emit('login', data.username)
             setLoad(false)
         })
         .catch(err => {

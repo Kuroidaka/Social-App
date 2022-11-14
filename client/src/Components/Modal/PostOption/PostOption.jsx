@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
-import { deletePost } from '../../../redux/requestApi'
+import { useSelector } from 'react-redux'
+
 import './PostOption.css'
 
 const PostOption = (props) => {

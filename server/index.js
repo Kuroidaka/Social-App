@@ -7,14 +7,10 @@ const cookieParser = require('cookie-parser')
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser');
 const connect = require('./config/database')
-let Grid = require('gridfs-stream');
 const upload = require('./routes/photo.route')
 const routes = require('./routes/index')
-const fs = require('fs')
 const app = express()
 
-
-let gfs;
 connect();
 
 app.use(
@@ -25,7 +21,6 @@ app.use(
 app.use(cors()) 
 app.use(cookieParser())
 app.use(morgan('dev'))
-
 app.use(express.json())
 
 routes(app)
@@ -38,7 +33,7 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 const port = process.env.PORT || 8000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log('listening on port')
 })
 

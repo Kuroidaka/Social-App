@@ -1,0 +1,1 @@
+export const CONNECTIONPORT = 'ws://localhost:8900/'

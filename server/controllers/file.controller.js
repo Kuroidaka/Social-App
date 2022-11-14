@@ -23,7 +23,7 @@ const photoController = {
     },
     getFile :async (req, res) => {
         try {
-            const readStream = fs.createReadStream(`server/asserts/uploads/${req.params.filename}`)
+            const readStream = fs.createReadStream(`asserts/uploads/${req.params.filename}`)
             readStream.pipe(res);
         } catch (error) {
             res.send("not found");

@@ -1,31 +1,32 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import classNames from "classnames/bind"
-import styles from './NewFeed.module.scss'
+// import classNames from "classnames/bind"
+// import styles from './NewFeed.module.scss'
 
 import PubPost from "../PubPosts/PubPosts"
 
-const cx = classNames.bind(styles)
+// const cx = classNames.bind(styles)
 
 const NewFeed = (props) => {
     const { id, home , post } = props
     const [posts, setPosts] = useState([])
-    const [pending, setPending] = useState(true)
+    // const [pending, setPending] = useState(true)
     const getPosts = async () => {
-        setPending(true)
+        // setPending(true)
         if(home){
             axios.get('/post/getAll')
             .then((res) => {
                 setPosts(res.data)
-                setPending(false)
+                // setPending(false)
             })
         }
         else {  
             await setPosts(post) 
-            setPending(false)
+            // setPending(false)
         }
     }
     useEffect(() => {
+        console.log('get post ');
         getPosts()
     }, []) 
 

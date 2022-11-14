@@ -2,13 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDispatch, useSelector } from 'react-redux'
 import { faImage} from '@fortawesome/free-regular-svg-icons'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
 import './ModalPost.css'
 import PostImg from './PostImg'
-import { createPost } from '../../../redux/postSlice'
+// import { createPost } from '../../../redux/postSlice'
 import { Post } from '../../../redux/requestApi'
-import { UserContext } from '../../../App'
+// import { UserContext } from '../../../App'
 
 const ModalPost = (props) => { 
     const { setModalPost} = props

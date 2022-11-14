@@ -45,7 +45,6 @@ const PubPost = (props) => {
         } 
         else if(postTime.month !== currentTime.month){
             timer =  `${postTime.date} ${monthNames[postTime.month-1]}`
-            console.log(postTime.month);
         } 
         else if(postTime.date !== currentTime.date){
             let tmp = currentTime.date - postTime.date

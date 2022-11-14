@@ -1,16 +1,37 @@
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { Fragment } from 'react';
+// import { useEffect } from 'react';
+import { Fragment, useState, useRef } from 'react';
 
 import styles from './Chat.module.scss'
+// import { socket } from '../../services/socket';
+import ChatInput from './ChatInput';
 const cx = classNames.bind(styles)
 
 
 const ChatSide = (props) => {
     const {currentChat} = props
+    const [chatContent, setChatContent] = useState([])
+    const chatBoxRef = useRef()
 
     console.log(currentChat);
+    // useEffect(() => {
+    //     socket.on('receive_mes', messageData => {
+    //         setChatContent(prev => [...prev, messageData])
+
+    //     })
+    //     return () => {
+    //         socket.off('receive_mes')
+    //     }
+    // }, [socket]) 
+    // useEffect(() => {
+    //     if(chatContent.length !== 0){
+    //             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight 
+    //     }
+
+    // },[chatContent])
+
     return (
         <div className={cx("chat-side")}>
           {currentChat 
@@ -31,44 +52,30 @@ const ChatSide = (props) => {
                     </div>
                 </div>
                                             
-                <div className={cx("box_chat-body")}>
-                        <div className={cx("me-chat")}>
+                <div ref={chatBoxRef} className={cx("box_chat-body")}>
+                {chatContent.map((chat, idx) => {
+                    return (
+                        <div 
+                        className={chat.authorId === currentChat._id? cx('other-chat') : cx('me-chat')} 
+                        key={idx}>
                             <div className={cx("chat-content-wrapper")}>
-                                <div className={cx("chat-content")}>dạo này trình giao tiếp của m sao r</div>
+                                <div className={cx("chat-content")}>{chat.mes}</div>
                             </div>
                         </div>
+                    )
+                })}
+                       
     
-                        <div className={cx("other-chat")}>
+                        {/* <div className={cx("other-chat")}>
                             <div className={cx("chat-content-wrapper")}>
                                 <div className={cx("chat-content")}>dạo này trình giao tiếp  m sao r</div>
                             </div>
                         </div>
-    
-                        <div className={cx("other-chat")}>
-                            <div className={cx("chat-content-wrapper")}>
-                                <div className={cx("chat-content")}>dạo này trình giao til admwla m sao r</div>
-                            </div>
-                        </div>
-                        <div className={cx("me-chat")}>
-                            <div className={cx("chat-content-wrapper")}>
-                                <div className={cx("chat-content")}>dạo này la m sao r</div>
-                            </div>
-                        </div>
-    
-                        <div className={cx("other-chat")}>
-                            <div className={cx("chat-content-wrapper")}>
-                                <div className={cx("chat-content")}>dạo này trình giao tiếp \awlk malwm lkdawmlk dawmkl admwla m sao r</div>
-                            </div>
-                        </div>
-                    
+                     */}
                 </div>
     
                 <div className={cx("box_chat-footer")}>
-                        <div className={cx("input-box")}>
-                            <div className={cx("input-wrapper")}>
-                                <input type="text" className={cx("input")} />
-                            </div>
-                        </div>
+                     <ChatInput />
                 </div>
            </Fragment>
             :<>

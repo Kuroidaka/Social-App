@@ -27,6 +27,7 @@
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "sass": "^1.55.0",
+    "socket.io-client": "^4.5.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -53,7 +54,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage":"http://localhost:3000/login",
+  "homepage": "http://localhost:3000/login",
   "proxy": "http://localhost:8000/"
-  
 }

@@ -2,7 +2,7 @@ import axios from 'axios';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 import useDebounce from '../../Hooks/useDebounce';
 
 import styles from './Chat.module.scss'
@@ -50,7 +50,8 @@ const UserSide = (props) => {
     }
 
     const handleAddChatList = (user) => {
-        setChatList(prev => [...prev, user])
+        !chatList.some((existUser)=>{ return existUser._id === user._id })
+        && setChatList(prev => [...prev, user])
         setCurrentChat(user)
         setUserItem([])
         setInput('')
@@ -73,7 +74,9 @@ const UserSide = (props) => {
             
             ?<div className="user_search-list">
                 {userItem.map(user => {
-                    return ( 
+                   
+                if(user._id !== currentUser._id) 
+                return ( 
                         <div className={cx("user-item-tiny")} key={user._id} onClick={() => handleAddChatList(user)}>  
                             <img className={cx("user-item-avatar" )} src={user.info.avatarUrl} alt=""/>
                             <div className={cx("user-item-info")}>

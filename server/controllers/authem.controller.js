@@ -137,6 +137,7 @@ const authemControllers = {
         })
             
     },
+
     logout: async (req, res) => {
         const refreshToken = req.cookies.refreshToken
         // console.log('REFRESH TOKEN IN CONTROLLER',refreshToken);

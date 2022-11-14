@@ -1,10 +1,10 @@
 // import { updateError, updateStart, updateSuccess, } from "./userSlice"
 import {
-        createPostStart, createPost, createPostError, 
+        createPost,
         deleteStart, deleteError, destroyPost,} from './postSlice'
 import { 
-        loginStart, loginError, loginSuccess,
-        registerStart,registerError, registerSuccess,  
+        loginSuccess,
+        registerStart,registerError, 
         getUserStart, getUserSuccess, getUserError,
         updateUserStart, updateUserSuccess, updateUserError,
         logOutStart, logOutSuccess, logOutError, } from './authSlice'
@@ -118,7 +118,6 @@ export const AllUsers = async (dispatch) => {
     try{
         const res = await axios.get('/user/getAll')
         // console.log('dispatch in redux', res.data)
-        
         dispatch(getAll(res.data))
     }
     catch{

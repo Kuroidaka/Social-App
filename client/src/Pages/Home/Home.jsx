@@ -3,8 +3,11 @@ import { useDispatch} from "react-redux";
 import NewFeed from "../../Components/NewFeed/NewFeed";
 import UserItem from "../../Components/UserItem/UserItem";
 import { AllUsers } from "../../redux/requestApi";
-import Posts from '../../Components/CreatePosts/Posts'
+// import Posts from '../../Components/CreatePosts/Posts'
+
 import './Home.css'
+
+
 
 const Home = (props) => {
     const { users  } = props
@@ -12,7 +15,6 @@ const Home = (props) => {
     const newUserList = [...users].reverse()
     useEffect(() => {
         AllUsers(dispatch)
-
     }, [])
 
     return (  

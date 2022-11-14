@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileCirclePlus, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const PostImg = (props) => {
     const { setImportImg, setPostImg } = props

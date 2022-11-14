@@ -4,8 +4,11 @@ import { faEarthAsia, faRightFromBracket } from "@fortawesome/free-solid-svg-ico
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { io } from "socket.io-client";
+import { CONNECTIONPORT } from "../../config";
 import { LogOut } from "../../redux/requestApi";
 
+import { Socket } from "../../services/socket";
 import Avatar from '../Avatar/Avatar'
 
 const Popper = (props) => {
@@ -19,7 +22,8 @@ const Popper = (props) => {
     const handleLogOut = async (e) => {
         e.preventDefault()
         LogOut(dispatch, id, accessToken, navigate)
-        
+        console.log(Socket);
+        await Socket.emit('forceDisconnect')
     }
 
     return ( 
