@@ -16,8 +16,10 @@ const User = new Schema ({
     accessToken: {type: String, default: '' },
     conservation: [ 
         {
-            OtherUserId:    {type: String},
-            OtherUserName:  {type: String},
+           _id : { type: mongoose.Schema.Types.ObjectId},
+          
+        },{
+            timestamps: true
         }
     ]
 

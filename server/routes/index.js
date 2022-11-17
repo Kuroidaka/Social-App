@@ -11,7 +11,7 @@ function routes(app) {
     app.use('/authem', authemRouter)
     app.use('/user', userRouter)
     app.use('/file', photoRouter)
-    app.use('/chat', conservationRouter)
+    app.use('/conversation', conservationRouter)
 }
 
 module.exports = routes
