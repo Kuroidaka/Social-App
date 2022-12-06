@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './SearchBar.module.scss'
 import { deleteStorage, storageSearchUser } from '../../redux/requestApi'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import Avatar from '../Avatar/Avatar';
 
 const cx = classNames.bind(styles)
 const PopperSearch = (props) => {
@@ -51,7 +52,7 @@ const PopperSearch = (props) => {
                     return  <div key={idx} className={cx("user-item")}>
                                 <div onClick={() => handleClick(user)} className="link">
                                     <div className={cx("user-info")}>
-                                                <img alt='' src={user.info.avatarUrl} className={cx("avatar")} />
+                                                <Avatar src={user.info.avatarUrl} width='30px'/>
                                                 <div className={cx("name-box")}>
                                                     <div className={cx("name")}>
                                                     {user.info.name}
@@ -79,7 +80,7 @@ const PopperSearch = (props) => {
                     return  <div key={idx}  className={cx("user-item")}>
                                 <div onClick={() => handleClick(user)}  className="link">
                                     <div className={cx("user-info")}>
-                                                <img alt='' src={user.avatarUrl} className={cx("avatar")} />
+                                                <Avatar src={user.avatarUrl} width='30px'/>
                                                 <div className={cx("name-box")}>
                                                     <div className={cx("name")}>
                                                     {user.name}

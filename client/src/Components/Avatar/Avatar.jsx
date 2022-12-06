@@ -1,11 +1,18 @@
-import './Avatar.css'
+import classNames from 'classnames/bind';
+
+import styles from './Avatar.module.scss'
+
+const cx = classNames.bind(styles)
 
 const Avatar = (props) => {
-    const { src, classStyles, width } = props
+    const { src, classStyles, width, alt } = props
+
+    const className = cx('avatar', {
+        [classStyles] : classStyles
+    })
+
     return (    
-        <div className={`avatar-wrapper ${classStyles}`}>
-            <img src={src} style={{width: width}} className="avatar" alt="" />
-        </div>
+            <img src={src} style={{width: width}} className={className} alt={alt} />
     );
 }
  

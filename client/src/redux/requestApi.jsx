@@ -11,6 +11,8 @@ import {
 import {
         getAllStart, getAll, getAllError,
         searchUserSuccess, deleteUserSuccess } from './userSlice'
+import {createCon, setCurChatUser} from './conservationSlice'
+        
 
 import axios from 'axios'
 
@@ -143,3 +145,16 @@ export const deleteStorage = async (dispatch, username) => {
         console.log('delelte failure', error);
     }
 }
+
+export const createChat = async (dispatch, data, navigate) => {
+    const {user} = data
+
+    dispatch(createCon(user._id))
+    navigate && navigate(`/chat`)
+}
+
+export const setCurChat = async (dispatch, user) => {
+    dispatch(setCurChatUser(user))
+
+}
+

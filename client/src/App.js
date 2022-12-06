@@ -1,29 +1,20 @@
-import { createContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
 
-import './App.css';
-
-import Chat from './Pages/Chat/Chat';
-import Home from './Pages/Home/Home';
-import Profile from './Pages/Profile/Profile';
-import HeaderLayout from './layouts/HeaderLayout';
-import AuthPage from './Pages/login/AuthPage';
-import { Socket } from './services/socket';
-
-export const UserContext = createContext()
-
+import { UserContext } from './Context';
+import Chat from './features/Chat/pages/Chat';
+import Home from './features/Home/pages/Home';
+import Profile from './features/Profile/pages/Profile';
+import HeaderLayout from './layouts/HeaderLogged/main';
+import AuthPage from './features/Login/pages/AuthPage';
+// import { Socket } from './services/socket';
 
 function App() {
-  // const currentUser = useSelector(state => state.auth.login?.currentUser )
   const users = useSelector(state => state.user.allUser)
-  const [socket, setSocket] = useState()
-
-  
 
   return (
 
-    <Router> 
+    <BrowserRouter> 
       {/* NAV BAR */}
       
         <div className='App'>
@@ -57,7 +48,7 @@ function App() {
               
         </div>      
       
-    </Router>
+    </BrowserRouter>
 
   );
 }

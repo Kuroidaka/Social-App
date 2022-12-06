@@ -7,7 +7,8 @@ import axios from 'axios'
 import './edit.css'
 import { updateUserInfo } from '../../../redux/requestApi'
 import Input from '../../InputInfo/Input'
-import { UserContext } from '../../../App'
+import { UserContext } from '../../../Context'
+
 
 function EditModal(props) {
   const {check, setCheck, setEdit, setLoad } = props

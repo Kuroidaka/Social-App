@@ -1,0 +1,14 @@
+.main-header {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: #fafafa;
+    height: var(--header-bar-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  }
+  
