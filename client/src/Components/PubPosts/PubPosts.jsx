@@ -1,24 +1,23 @@
- import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
-
-import './PubPosts.css'
-import { faFaceSmile } from '@fortawesome/free-regular-svg-icons';
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { Link, useNavigate } from 'react-router-dom'
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+
+import { setCurrentProfileUser } from '../../redux/requestApi'
 import PostOption from '../Modal/PostOption/PostOption';
-import { useSelector } from 'react-redux';
 import PostContact from './PostContact/PostContact';
-
-
-
+import './PubPosts.css'
 
 const PubPost = (props) => {
     const { id, post} = props
     const [modalOption, setModalOption] = useState(false)
     const currentUser = useSelector(state => state.auth.login?.currentUser )
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-  ];
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
         const date = post.createdAt.split('T')[0].split('-')
         const time = post.createdAt.split('T')[1].split(':')
@@ -69,6 +68,11 @@ const PubPost = (props) => {
     const handleOptionClick = () => {
         setModalOption(true)
     }
+
+    const handleUserClick = () => {
+        // dispatch
+        setCurrentProfileUser(dispatch, navigate, post?.userId)
+    }
     
     return ( 
 
@@ -76,13 +80,13 @@ const PubPost = (props) => {
 
         { modalOption && <PostOption post={post} setModalOption={setModalOption}/>}
             <header className="PubPost_header">
-                <a href={`/Profile/${post?.userId}`} className="PubPost_header-user-info" >
+                <Link to={`/Profile/${post?.userId}`} onClick={handleUserClick} className="PubPost_header-user-info" >
                     <img className="PubPost_header-avatar" src={post?.avatarUrl} alt='avatar'/>
                     <div className="PubPost_header-name-wrapper">
                         <p className="PubPost_header-name">{post?.name}</p>
                         <div className="PubPost_header-timer">{timer}</div>
                     </div>
-                </a>
+                </Link>
                 
             {currentUser?._id === post?.userId && 
                 <FontAwesomeIcon 
@@ -104,7 +108,6 @@ const PubPost = (props) => {
 
             <div className='PubPost_footer'>
                     <PostContact post={post}/>
-             
             </div>
 
 

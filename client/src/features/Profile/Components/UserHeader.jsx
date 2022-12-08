@@ -20,7 +20,7 @@ function Header(props) {
 
     const navigate = useNavigate()
     let ownUser = true
-    if(currentUser?._id !== user._id) {
+    if(currentUser?._id !== user?._id) {
       ownUser = false
     }
     const handleClickEdit = () => {
@@ -49,13 +49,13 @@ function Header(props) {
   return (
     <header>
       
-      <div className="header-wrapper" style={{ backgroundImage: `linear-gradient(${user.info.theme} 20%, white 100%)` }}>
+      <div className="header-wrapper" style={{ backgroundImage: `linear-gradient(${user?.info.theme} 20%, white 100%)` }}>
 
         <div className="user">
             <div className="img-wrapper">
                 <img
                     className="user_avatar"
-                    src={user.info.avatarUrl}
+                    src={user?.info.avatarUrl}
                     alt="avatar"
                 />
             </div>
@@ -65,7 +65,7 @@ function Header(props) {
 
       <div className="user-control">
           <div className="user-info">
-            <div className="name">{user.info.name}</div>
+            <div className="name">{user?.info.name}</div>
             
           {ownUser ? 
             <button className="edit-btn" onClick={handleClickEdit}>
@@ -85,7 +85,7 @@ function Header(props) {
       </div>
 
 
-      { currentUser?._id === user._id 
+      { currentUser?._id === user?._id 
       ? <UserAbout user={currentUser}/>
       : <UserAbout user={user}/>}
 

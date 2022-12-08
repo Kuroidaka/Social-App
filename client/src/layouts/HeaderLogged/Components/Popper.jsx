@@ -3,11 +3,12 @@ import classNames from 'classnames/bind';
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { faMoon } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEarthAsia, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
+import authApi from '../../../api/authApi'
 import Avatar from '../../../Components/Avatar/Avatar';
 import { LogOut } from "../../../redux/requestApi";
+import NavBarPopper from './NavBarPopper'
 import styles from '../Styles/Popper.module.scss'
 
 const cx = classNames.bind(styles)
@@ -22,7 +23,12 @@ const Popper = (props) => {
 
     const handleLogOut = async (e) => {
         e.preventDefault()
-        LogOut(dispatch, id, accessToken, navigate)
+        
+        await authApi.logout()
+        .then(() => {
+            LogOut(dispatch, navigate)
+        })
+        
     }
 
     return ( 
@@ -34,28 +40,21 @@ const Popper = (props) => {
                 <div className={cx("popper-item-content")}><strong>{user.info.name || user.info.username}</strong></div>
             </Link>
 
-            <div className={cx("popper-item")}>
-                <div className={cx("popper-item-icon-wrapper")}>
-                    <FontAwesomeIcon className={cx("popper-item-icon")} icon={faEarthAsia}/>
-                </div>
-                <div className={cx("popper-item-content")}>Language</div>
-            </div>
+            <NavBarPopper 
+                icon={faEarthAsia}
+                content = 'Language'
+            />
+            <NavBarPopper 
+                icon={faMoon}
+                content = 'Display'
+            />
+            <NavBarPopper 
+                icon={faRightFromBracket}
+                content = 'Logout'
+                handleClick={handleLogOut}
+                stylesConfig= {{borderTop: '1px solid #f0f0f0'}}
+            />
 
-            <div className={cx("popper-item")}>
-                <div className={cx("popper-item-icon-wrapper")}>
-                    <FontAwesomeIcon className={cx("popper-item-icon")} icon={faMoon}/>
-                </div>
-                <div className={cx("popper-item-content")}>Display</div>
-            </div>
-
-            <form onSubmit={handleLogOut}>
-                <button className={cx("popper-item")}  style={{borderTop: '1px solid #f0f0f0'}}>
-                    <div className={cx("popper-item-icon-wrapper")}>
-                        <FontAwesomeIcon className={cx("popper-item-icon")} icon={faRightFromBracket}/>
-                    </div>
-                    <div className={cx("popper-item-content")}>Logout</div>
-                </button>
-            </form>
         </div>
     );
 }

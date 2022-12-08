@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch} from "react-redux";
 import classNames from "classnames/bind";
+import { useSelector } from 'react-redux';
 
 import NewFeed from "../../../Components/NewFeed/NewFeed";
 import UserItem from "../Components/UserItem/UserItem";
@@ -11,7 +12,7 @@ import styles from '../Home.module.scss'
 const cx = classNames.bind(styles)
 
 const Home = (props) => {
-    const { users  } = props
+    const users = useSelector(state => state.user.allUser)
     const dispatch = useDispatch()
     const newUserList = [...users].reverse()
     useEffect(() => {

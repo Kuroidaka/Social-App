@@ -1,11 +1,11 @@
-import axios from "axios"
 import classNames from "classnames/bind"
 import { useRef, useState } from "react"
 import { useDispatch } from "react-redux"
 
-import Button from "../../Components/Button/Button"
-import InputBar from "../../Components/InputBar/InputBar"
-import { registerSuccess } from "../../redux/authSlice"
+import authApi from "../../../api/authApi"
+import Button from "../../../Components/Button/Button"
+import InputBar from "../../../Components/InputBar/InputBar"
+
 import styles from '../Login.module.scss'
 
 const cx = classNames.bind(styles)
@@ -18,7 +18,6 @@ const RegisterPage = (props) => {
     const refName = useRef()
     const refUserName = useRef()
     const refPd = useRef()
-    const dispatch = useDispatch()
 
     const handleSubmitRegister = async (e) => {
         e.preventDefault()
@@ -41,8 +40,7 @@ const RegisterPage = (props) => {
                 username: username,
                 password: password
             }
-            await axios.post('/authem/register', newUser)
-            .then(() => {dispatch(registerSuccess())})
+            await authApi.register(newUser)
             .then(() => {
                 setLog(!log)
                 setLoad(false)

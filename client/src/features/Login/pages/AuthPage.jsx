@@ -2,7 +2,7 @@ import classNames from "classnames/bind"
 import { useState } from "react";
 import LoginPage from "../Components/Login";
 import styles from '../Login.module.scss'
-import RegisterPage from "../Components/Login";
+import RegisterPage from "../Components/Register";
 
 const cx = classNames.bind(styles)
 
@@ -19,7 +19,8 @@ const AuthPage = () => {
             ?<div className={cx("page-loading")}>
                     <div className={cx("lds-ellipsis")}><div></div><div></div><div></div><div></div></div>
             </div> 
-            :(log
+            :(
+                log
                 ? <LoginPage log={log} setLog={setLog} setLoad={setLoad} state={state} setState={setState} />
                 : <RegisterPage log={log} setLog={setLog} setLoad={setLoad}/>
             )

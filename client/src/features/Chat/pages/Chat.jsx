@@ -12,7 +12,7 @@ import ChatSide from "../Components/ChatSide";
 import UserSide from "../Components/UserSide";
 const cx = classNames.bind(styles)
 
-const Chat = (props) => {
+const Chat = () => {
 
     const [chatList, setChatList] = useState([])
     const [load, setLoad] = useState(true)

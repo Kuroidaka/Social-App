@@ -1,15 +1,15 @@
 import { faCircleXmark, faMagnifyingGlass, faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState, useEffect } from "react";
+import Tippy from '@tippyjs/react/headless'
+import { useSelector } from "react-redux";
 import { useDebounce } from '../../Hooks'
+import classNames from 'classnames/bind'
 import axios from 'axios'
 
-import classNames from 'classnames/bind'
-import Tippy from '@tippyjs/react/headless'
-
+import userApi from '../../api/userApi'
 import styles from './SearchBar.module.scss'
 import PopperSearch from "./PopperSearch";
-import { useSelector } from "react-redux";
 
 
 const cx = classNames.bind(styles)
@@ -32,13 +32,11 @@ const SearchBar = () => {
         setLoad(true)
         const fetchApi = async () => {
             try {
-                const result = await axios.get(`/user/search`, {
-                    params: {
-                        key: deBounce
-                    }
-                })
-
-                setUserItem(result.data)
+                const params = {
+                    key: deBounce
+                }
+                const data = await userApi.search(params)
+                setUserItem(data)
                 setLoad(false)
             } catch (error) {
                 console.log('fetch failure', error);

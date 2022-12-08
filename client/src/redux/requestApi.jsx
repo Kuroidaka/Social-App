@@ -1,106 +1,77 @@
 // import { updateError, updateStart, updateSuccess, } from "./userSlice"
 import {
         createPost,
-        deleteStart, deleteError, destroyPost,} from './postSlice'
+        destroyPost,} from './postSlice'
 import { 
         loginSuccess,
-        registerStart,registerError, 
-        getUserStart, getUserSuccess, getUserError,
-        updateUserStart, updateUserSuccess, updateUserError,
-        logOutStart, logOutSuccess, logOutError, } from './authSlice'
+        getUserSuccess,
+        updateUserSuccess,
+        logOutSuccess, } from './authSlice'
 import {
-        getAllStart, getAll, getAllError,
-        searchUserSuccess, deleteUserSuccess } from './userSlice'
+        getAll,
+        searchUserSuccess, 
+        deleteUserSuccess,
+        setCurrentProfileUserSuccess } from './userSlice'
 import {createCon, setCurChatUser} from './conservationSlice'
         
 
 import axios from 'axios'
 
 export const updateUserInfo = async (userUpdated, dispatch, id, accessToken) => {
-    dispatch(updateUserStart())
-    try{
-        const res = await axios.post('/user/updateInfo/'+id, userUpdated,
-        {
-            cookies: { accessToken: accessToken }
-        })
-        dispatch(updateUserSuccess(res.data))
-    }
-    catch{
-        dispatch(updateUserError())
-    }
+
+    const res = await axios.post('/user/updateInfo/'+id, userUpdated,
+    {
+        cookies: { accessToken: accessToken }
+    })
+    dispatch(updateUserSuccess(res.data))
+   
 }
 
-export const register = async (user, dispatch) => {
-    dispatch(registerStart())
-    try{
-        // await axios.post('/authem/register', user)
-        // dispatch(registerSuccess())
-        // navigate('/')
-    }
-    catch{
-        dispatch(registerError())
-    }
+export const login = async (data, dispatch, navigate) => {
+    await dispatch(loginSuccess(data))
+    navigate('/')
 }
 
-export const login = async (res, dispatch, navigate) => {
-        await dispatch(loginSuccess(res.data))
-     
-}
-
-export const LogOut = async (dispatch, id, accessToken, navigate) => {
-    dispatch(logOutStart())
-    try{
-        await axios.post('/authem/logout/'+id,
-        {
-            headers: { token: `Bearer ${accessToken}` }
-        })
-        .then(()=> {dispatch(logOutSuccess())})       
-        .then(()=> {navigate('/login')})
-        
-        
-        
-    }
-    catch{
-        dispatch(logOutError())
-    }
+export const LogOut = async (dispatch, navigate) => {
+    
+    dispatch(logOutSuccess())
+    navigate('/login')
 }
 
 export const getUser = async (dispatch, id) => {
-    dispatch(getUserStart())
-    try{
-        const res = await axios.get('/user/getUser'+ id)
-        dispatch(getUserSuccess(res.data))
-        // navigate(`/Profile/${id}`)
-    }
-    catch{
-        dispatch(getUserError())
-    }
+
+    const res = await axios.get('/user/getUser'+ id)
+    dispatch(getUserSuccess(res.data))
+    // navigate(`/Profile/${id}`)
+   
+}
+
+export const setCurrentProfileUser = async (dispatch, navigate, userId) => {
+    dispatch(setCurrentProfileUserSuccess(userId))
+    navigate(`/Profile/${userId}`)
+
+
 }
 
 
 // POST 
 export const Post = async (dispatch, userId, newPost, formData) => {
-    // dispatch(createPostStart())
-    try{
-        await console.log(formData.file);
-            const resFile = await axios.post(`/file/upload/`, formData, {
-                headers: {
-                  'Content-Type': 'multipart/form-data'
-                }
-            })
-            newPost = { ...newPost, imgUrl: resFile.data }
+
+
+    const resFile = await axios.post(`/file/upload/`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    newPost = { ...newPost, imgUrl: resFile.data }
         
     const res = await axios.post('/post/createPost/'+ userId, newPost)
 
     await dispatch(createPost(res.data))
-    }
-    catch{
-        // dispatch(createPostError())
-    }
+
 }
 
 export const deletePost = async( dispatch, postId, userId, postUserId) => {
-    dispatch(deleteStart())
     try{
         // const id = { userId, postId}
 
@@ -110,26 +81,20 @@ export const deletePost = async( dispatch, postId, userId, postUserId) => {
 
     }
     catch{
-        dispatch(deleteError())
         console.log('delete error');
     }
 } 
 
 export const AllUsers = async (dispatch) => {
-    dispatch(getAllStart())
-    try{
-        const res = await axios.get('/user/getAll')
-        // console.log('dispatch in redux', res.data)
-        dispatch(getAll(res.data))
-    }
-    catch{
-        dispatch(getAllError())
-    }
+
+    const res = await axios.get('/user/getAll')
+    // console.log('dispatch in redux', res.data)
+    dispatch(getAll(res.data))
+
 }
 
 
 export const storageSearchUser = async (dispatch, storage) => {
-    console.log(storage);
     try {
         dispatch(searchUserSuccess(storage))
 
