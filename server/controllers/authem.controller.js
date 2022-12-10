@@ -139,12 +139,12 @@ const authemControllers = {
     },
 
     logout: async (req, res) => {
-        const refreshToken = req.cookies.refreshToken
+        // const refreshToken = req.cookies.refreshToken
         // console.log('REFRESH TOKEN IN CONTROLLER',refreshToken);
 
-        res.clearCookie('refreshToken')
+        res.clearCookie('accessToken')
 
-        refreshTokens = refreshTokens.filter(token => token!== refreshToken)
+        //refreshTokens = refreshTokens.filter(token => token!== refreshToken)
         res.status(200).json('logged out')
     }
 

@@ -7,7 +7,8 @@
     height: var(--header-bar-height);
     position: fixed;
     z-index: 99;
-    width: 1000px;
+    max-width: 1000px;
+    width: 100%;
     justify-self: center;
 }
 /* 

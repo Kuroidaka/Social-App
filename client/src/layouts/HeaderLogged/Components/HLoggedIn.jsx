@@ -8,6 +8,7 @@ import SearchBar from '../../../Components/SearchBar/SearchBar';
 import Popper from './Popper';
 import Interaction from '../../../Components/Interaction/Interation';
 import styles from '../Styles/LoggedIn.module.scss'
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles)
 
@@ -15,12 +16,14 @@ const HLoggedIn = () => {
     const user = useSelector(state => state.auth.login?.currentUser)
     const [popper, setPopper] = useState(false)
 
-
+    const handleClickHome = () => {
+        console.log(123);
+    }
 
     return (
         <div className={cx("bar")}>
             <div className={cx("logo")}>
-                <a href="/" className={cx("logo-link")} style={{letterSpacing: '3px'}}>Home</a>
+                <Link to="/" className={cx("logo-link")} onClick={handleClickHome} style={{letterSpacing: '3px'}}>Home</Link>
             </div>
 
             <SearchBar />

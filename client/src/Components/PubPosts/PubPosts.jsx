@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
 import { Link, useNavigate } from 'react-router-dom'
@@ -9,9 +9,11 @@ import PostOption from '../Modal/PostOption/PostOption';
 import PostContact from './PostContact/PostContact';
 import './PubPosts.css'
 
+
 const PubPost = (props) => {
-    const { id, post} = props
+    const { post, posts, setPosts } = props
     const [modalOption, setModalOption] = useState(false)
+    // const [post, setpost] = useState(post)
     const currentUser = useSelector(state => state.auth.login?.currentUser )
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -64,7 +66,7 @@ const PubPost = (props) => {
             timer = 'Just now'
         }
 
-
+        
     const handleOptionClick = () => {
         setModalOption(true)
     }
@@ -74,21 +76,29 @@ const PubPost = (props) => {
         setCurrentProfileUser(dispatch, navigate, post?.userId)
     }
     
+    // useEffect(() => {
+    //     setpost(post)
+        
+    //     // return () => {
+    //     //     setpost('')
+    //     // }
+    // }, [post])
+
     return ( 
 
-        <div className="PubPost" key={id}>
+        <div className="PubPost">
 
-        { modalOption && <PostOption post={post} setModalOption={setModalOption}/>}
+        { modalOption && <PostOption post={post} posts={posts} setPosts={setPosts} setModalOption={setModalOption} />}
             <header className="PubPost_header">
-                <Link to={`/Profile/${post?.userId}`} onClick={handleUserClick} className="PubPost_header-user-info" >
-                    <img className="PubPost_header-avatar" src={post?.avatarUrl} alt='avatar'/>
+                <Link to={`/Profile/${post?.userId._id}`} onClick={handleUserClick} className="PubPost_header-user-info" >
+                    <img className="PubPost_header-avatar" src={post?.userId?.info?.avatarUrl} alt='avatar'/>
                     <div className="PubPost_header-name-wrapper">
-                        <p className="PubPost_header-name">{post?.name}</p>
+                        <p className="PubPost_header-name">{post?.userId?.info?.name}</p>
                         <div className="PubPost_header-timer">{timer}</div>
                     </div>
                 </Link>
                 
-            {currentUser?._id === post?.userId && 
+            {currentUser?._id === post?.userId._id && 
                 <FontAwesomeIcon 
                     className='PubPost_header-option-icon' 
                     icon={faEllipsis} 

@@ -9,9 +9,8 @@ import EditModal from '../../../Components/Modal/Edit/EditModal'
 import Header from '../Components/UserHeader';
 import Posts from '../../../Components/CreatePosts/Posts';
 import NewFeed from '../../../Components/NewFeed/NewFeed';
-import { UserContext } from '../../../Context';
-import axios from 'axios';
 import userApi from '../../../api/userApi'
+import postApi from '../../../api/postApi'
 
 import styles from '../Profile.module.scss'
 import { useParams } from 'react-router-dom';
@@ -21,9 +20,10 @@ const cx = classNames.bind(styles)
 const Profile = (props) => {
     const [edit, setEdit] = useState(false)
     const [load, setLoad] = useState(false)
-    const [posts, setPosts] = useState()
+    // const [posts, setPosts] = useState()
     const [check, setCheck] = useState(false)
     const [user, setUser] = useState()
+    const [posts, setPosts] = useState([])
     const [modalPost, setModalPost] = useState(false)
     const users = useSelector(state => state.user.allUser)
     const currentUser = useSelector(state => state.auth?.login?.currentUser)
@@ -35,22 +35,19 @@ const Profile = (props) => {
     }
 
     useEffect(() => {
-        setLoad(true)
-        axios.get(`/post/get/${id}`)
-        .then((res) => {
-            console.log('get user');
-            setPosts(res.data)
-            setLoad(false)
+        postApi.getById(id)
+        .then((data) => {
+            setPosts(data.reverse())
         })
-        .catch(() => {
-            console.log('fetching error');
-            setLoad(false)
-        }) 
-    }, [check]) 
+        .catch((error) => {
+            console.log(error);
+        })    
 
-    // useEffect(() => {
-    //     getUser(id)
-    // }, [id]) 
+    }, []) 
+
+    useEffect(() => {
+        getUser(id)
+    }, [check]) 
 
 
     return ( 
@@ -74,7 +71,7 @@ const Profile = (props) => {
                 { currentUser._id === user?._id
                     ?<Posts setModalPost={setModalPost} user={currentUser}/>
                     :<Posts setModalPost={setModalPost} user={user}/>}
-                {posts && <NewFeed id={id} home={false} post={posts}/>}
+              {posts.length >= 1 && <NewFeed id={id} posts={posts} />}
             </div>
         
         </>

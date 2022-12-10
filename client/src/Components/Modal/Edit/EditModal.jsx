@@ -2,27 +2,27 @@ import { useState, useRef, useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
 
 import './edit.css'
 import { updateUserInfo } from '../../../redux/requestApi'
 import Input from '../../InputInfo/Input'
-import { UserContext } from '../../../Context'
+// import { UserContext } from '../../../Context'
+import userApi from '../../../api/userApi'
 
 
 function EditModal(props) {
   const {check, setCheck, setEdit, setLoad } = props
-  const { user } = useContext(UserContext)
+  // const { user } = useContext(UserContext)
   const currentUser = useSelector(state => state.auth.login.currentUser)
   const [selectIdx, setSelectIdx] = useState('')
   const picColorRef = useRef()
   const dispatch = useDispatch()
-  const [name, setName] = useState(user.info.name)
-  const [liveIn, setLiveIn] = useState(user.info.liveIn)
-  const [comeFrom, setComeFrom] = useState(user.info.comeFrom)
-  const [about, setAbout] = useState(user.info.about)
-  const [avaUrl, setAvaUrl] = useState(user.info.avatarUrl)
-  const [theme, setTheme] = useState(user.info.theme)
+  const [name, setName] = useState('')
+  const [liveIn, setLiveIn] = useState('')
+  const [comeFrom, setComeFrom] = useState('')
+  const [about, setAbout] = useState('')
+  const [avaUrl, setAvaUrl] = useState('')
+  const [theme, setTheme] = useState('')
 
   const avatarUrl = [
     'https://www.pngarts.com/files/11/Avatar-PNG-Pic.png',
@@ -63,18 +63,20 @@ function EditModal(props) {
       about: about,
       avatarUrl: avaUrl,
       theme: theme,
+      userId: currentUser._id
     }
+    const userId = currentUser._id
 
-    await axios.post(`/post/changePost?userId=${currentUser._id}`, userUpdated)
-    .then(() => {updateUserInfo(userUpdated, dispatch, user?._id, user?.accessToken)})
+    await userApi.edit( userUpdated, userId)
+    .then(() => {updateUserInfo(userUpdated, dispatch)})
     .then(() => {setCheck(!check); setLoad(false)})
     .catch((error)=> {console.log(error); setLoad(false)})
 
   }
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  },[])
+  // },[])
 
   return (
     <div >
@@ -94,7 +96,7 @@ function EditModal(props) {
               classStyle={'input-info'}
               type="text"
               onChange={(e) => setName(e.target.value)}
-              placeholder={user.info.name}
+              placeholder='What is your name'
             />
 
             <Input
@@ -102,7 +104,7 @@ function EditModal(props) {
               classStyle={'input-info'}
               type="text"
               onChange={(e) => setLiveIn(e.target.value)}
-              placeholder={user.info.liveIn}
+              placeholder='Where do you live?'
             />
 
             <Input
@@ -110,7 +112,7 @@ function EditModal(props) {
               classStyle={'input-info'}
               type="text"
               onChange={(e) => setComeFrom(e.target.value)}
-              placeholder={user.info.comeFrom}
+              placeholder='Where are you from?'
             />
 
             <Input
@@ -118,7 +120,7 @@ function EditModal(props) {
               classStyle={'input-info'}
               type="text"
               onChange={(e) => setAbout(e.target.value)}
-              placeholder={user.info.about}
+              placeholder='About yourself'
               textarea={true}
             />
 

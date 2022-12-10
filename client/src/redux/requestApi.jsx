@@ -1,7 +1,5 @@
 // import { updateError, updateStart, updateSuccess, } from "./userSlice"
-import {
-        createPost,
-        destroyPost,} from './postSlice'
+import { storePost, addPost, deletePost } from './postSlice'
 import { 
         loginSuccess,
         getUserSuccess,
@@ -17,14 +15,8 @@ import {createCon, setCurChatUser} from './conservationSlice'
 
 import axios from 'axios'
 
-export const updateUserInfo = async (userUpdated, dispatch, id, accessToken) => {
-
-    const res = await axios.post('/user/updateInfo/'+id, userUpdated,
-    {
-        cookies: { accessToken: accessToken }
-    })
-    dispatch(updateUserSuccess(res.data))
-   
+export const updateUserInfo = async (userUpdated, dispatch) => {
+    dispatch(updateUserSuccess(userUpdated))
 }
 
 export const login = async (data, dispatch, navigate) => {
@@ -43,47 +35,44 @@ export const getUser = async (dispatch, id) => {
     const res = await axios.get('/user/getUser'+ id)
     dispatch(getUserSuccess(res.data))
     // navigate(`/Profile/${id}`)
-   
 }
-
 export const setCurrentProfileUser = async (dispatch, navigate, userId) => {
     dispatch(setCurrentProfileUserSuccess(userId))
     navigate(`/Profile/${userId}`)
-
-
 }
-
-
 // POST 
-export const Post = async (dispatch, userId, newPost, formData) => {
+export const ReduxAddPost = async (dispatch, res) => {
 
 
-    const resFile = await axios.post(`/file/upload/`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    })
-    newPost = { ...newPost, imgUrl: resFile.data }
+    // const resFile = await axios.post(`/file/upload/`, formData, {
+    //     headers: {
+    //         'Content-Type': 'multipart/form-data'
+    //     }
+    // })
+    // newPost = { ...newPost, imgUrl: resFile.data }
         
-    const res = await axios.post('/post/createPost/'+ userId, newPost)
-
-    await dispatch(createPost(res.data))
-
+    // await axios.post('/post/createPost/', newPost)
+    
+        dispatch(addPost(res.data))
+    
 }
 
-export const deletePost = async( dispatch, postId, userId, postUserId) => {
-    try{
-        // const id = { userId, postId}
+export const ReduxStorePost = async (dispatch, posts) => {
+    dispatch(storePost(posts))
+}
 
-        // console.log(userId, '   --------    ', postUserId);
-        await axios.delete(`/post/deletePost/${userId}/${postId}/${postUserId}` )
-        dispatch(destroyPost(postId))
-
-    }
-    catch{
-        console.log('delete error');
-    }
+export const ReduxDeletePost = async( dispatch, postId ) => {
+    dispatch(deletePost(postId))
 } 
+
+// export const deletePost = async( dispatch, postId ) => {
+//     try{
+//         dispatch(destroyPost(postId))
+//     }
+//     catch{
+//         console.log('delete error');
+//     }
+// } 
 
 export const AllUsers = async (dispatch) => {
 

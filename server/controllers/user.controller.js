@@ -12,7 +12,7 @@ const userController = {
     },
     getUser: async (req, res) => {
         try{
-            const user = await User.findById(req.params.userId)
+            const user = await User.findById(req.query.userId)
             return res.status(200).json(user)
 
         }

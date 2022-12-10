@@ -12,9 +12,9 @@ const Conversations = new Schema ({
             }
            
         }
-    ]
-},{
-    timestamps: true
+    ],
+    createdAt: {type: Date, default: Date.now},
+    updatedAt: {type: Date, default: Date.now}
 },{
     collection: 'Conversations'
 }

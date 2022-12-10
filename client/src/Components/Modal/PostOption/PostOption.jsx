@@ -1,20 +1,25 @@
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { ReduxDeletePost } from '../../../redux/requestApi'
 
+// import { deletePost } from '../../../redux/requestApi'
 import './PostOption.css'
 
 const PostOption = (props) => {
-    const { setModalOption, post } = props
-    // const { user } = useContext(UserContext)
+    const { setModalOption, post, setPosts } = props
     const user = useSelector(state => state.auth?.login?.currentUser)
-    
+    const dispatch = useDispatch()
+
     const handleDelete = async (e) => {
         e.preventDefault()
-        await axios.delete(`/post/deletePost/${user._id}/${post._id}/${post.userId}`)
-        .then(() => {
-            setModalOption(false)
-            window.location.reload()
-        })
+           
+        await axios.delete(`/post/deletePost/${user._id}/${post._id}/${post.userId._id}`)
+            .then(() => {
+                setPosts(prev => prev.filter(target => post._id !== target._id) )
+                ReduxDeletePost(dispatch, post._id)
+                setModalOption(false)
+            })
         
     }
 

@@ -15,9 +15,9 @@ const cx = classNames.bind(styles)
 
 const Popper = (props) => {
     const { setPopper } = props
-    const user = useSelector(state => state.auth.login.currentUser)
-    const accessToken = user?.accessToken
-    const id = user?._id
+    const currentUser = useSelector(state => state.auth.login.currentUser)
+    const accessToken = currentUser?.accessToken
+    const id = currentUser?._id
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -35,9 +35,9 @@ const Popper = (props) => {
         <div className={cx("popper")}>
             <Link to={`/Profile/${id}`} className={cx("popper-item")} onClick={() => setPopper(false)} >
                 <div className={cx("popper-item-icon-wrapper")}>
-                   <Avatar src={user.info.avatarUrl} width='35px'/>
+                   <Avatar src={currentUser.info.avatarUrl} width='35px'/>
                 </div>
-                <div className={cx("popper-item-content")}><strong>{user.info.name || user.info.username}</strong></div>
+                <div className={cx("popper-item-content")}><strong>{currentUser.info.name || currentUser.info.username}</strong></div>
             </Link>
 
             <NavBarPopper 

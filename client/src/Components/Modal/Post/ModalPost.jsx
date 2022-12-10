@@ -6,20 +6,21 @@ import { useState } from 'react'
 
 import './ModalPost.css'
 import PostImg from './PostImg'
-// import { createPost } from '../../../redux/postSlice'
-import { Post } from '../../../redux/requestApi'
-// import { UserContext } from '../../../App'
+
+import { ReduxAddPost } from '../../../redux/requestApi'
+import postApi from '../../../api/postApi'
+import fileApi from '../../../api/fileApi'
+
 
 const ModalPost = (props) => { 
     const { setModalPost} = props
     const [importImg, setImportImg] = useState(false)
-    const user  = useSelector(state => state.auth.login.currentUser)
-    const userId = user?._id
-    const avatarUrl = user?.info.avatarUrl
-    const name = user?.info.name
+    const currentUser  = useSelector(state => state.auth.login.currentUser)
+    const userId = currentUser?._id
+
     const dispatch = useDispatch()
     const [postText, setPostText] = useState('')
-    const [postImg, setPostImg] = useState('')
+    const [imgUrl, setImgUrl] = useState('')
 
 
     const handleCloseClick = () =>{
@@ -36,19 +37,20 @@ const ModalPost = (props) => {
         // console.log(postImg);
         
         var formData = new FormData();
-        formData.append("file", postImg);
+        formData.append("file", imgUrl);
         
-        const newPost = {
-            postText: postText,
+        const resFile = await fileApi.post(formData)
+        
+        let newPost = {
             userId: userId,
-            name: name,
-            avatarUrl: avatarUrl,
+            postText: postText,
+            imgUrl: resFile.data,
 
         }
 
-        await Post(dispatch, userId, newPost, formData)
-        .then(()=> {
-            window.location.reload() 
+        await postApi.post(newPost)
+        .then((res) => {
+            ReduxAddPost(dispatch, res)
         })
       
     }
@@ -74,7 +76,7 @@ return (
                 <div className="modal-input-area">
                     <textarea type="text" spellCheck={false} placeholder='What are you thinking?' className="modal_content-input" onChange={(e) => setPostText(e.target.value)} />
                     { importImg &&  <PostImg 
-                                    setPostImg={setPostImg}
+                                    setPostImg={setImgUrl}
                                     setImportImg={setImportImg} 
                                   />
                     }
@@ -97,7 +99,7 @@ return (
 
                 <div className="modal-submit">
                     <button className="modal-submit-btn-wrapper" 
-                        style={{backgroundImage: `linear-gradient(${user.info.theme} 50%, white 100%)` }}>
+                        style={{backgroundImage: `linear-gradient(${currentUser.info.theme} 50%, white 100%)` }}>
                         <p className="modal-submit-btn">Post</p>
 
                     </button>

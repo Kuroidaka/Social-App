@@ -14,10 +14,9 @@ const conservationController = {
         res.status(500)
       }
     },
-    createConservation: async(req, res) => {
-      const {senderId, receiveId} = req.body
-
-      await Conversations.find(
+    findConservation: (req, res ) => {
+      const {senderId, receiveId} = req
+      Conversations.find(
         { 
           '$and': [
             {
@@ -29,24 +28,65 @@ const conservationController = {
           ]
         }
       )
+      .then(data => {
+        return res.json(data) 
+      })
+    },
+    createConservation: async(req, res) => {
+      const {senderId, receiveId} = req.body
+
+      condition ={ 
+        '$and': [
+          {
+            'member': { '$in': { '_id':  senderId}}
+          },
+          {
+            'member': { '$in': { '_id':  receiveId}}
+          }
+        ]
+      }
+      await Conversations.find(condition)
       .then(async data => {
+        
         if(!data.length){
           const conversation = new Conversations({
-            member: [{_id: senderId}, {_id: receiveId}]
+            member: [{_id: senderId}, {_id: receiveId}],
           })
           const data = await conversation.save()
-            return res.status(200).json(data)
+          return res.status(200).json(data)
         }
         else{
-          return res.status(200).json(data)
+          await Conversations.updateOne(condition ,{
+                  '$set':{ 
+                    updatedAt: Date.now()
+                  }
+              })
+          .then(() => conservationController.findConservation({senderId, receiveId}, res)
+          )
         }
       })
 
     },  
     getMessages: async(req, res) => {
       try {
+        console.log(req.params);
         const messages = await Chat.find({conversationId: req.params.conversationId})
         res.status(200).json(messages)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    getAllMessages: async(req) => {
+      try {
+        console.log(req.params);
+        const messages = await Chat.find({conversationId: req.params.conversationId})
+        .then(data => {
+          console.log(data);
+          return data
+        })
+       
+        
+      
       } catch (error) {
         console.log(error);
       }
@@ -57,7 +97,9 @@ const conservationController = {
           {member:{ '$in':{ _id : req.query.userId }}},
           'member createdAt updatedAt'
         )
+        .limit(10)
         .populate('member._id')
+        .sort({updatedAt: 'desc'})
         .then(data => {
           data.forEach(con => {
             con.member = con.member.filter(data => {
@@ -68,6 +110,8 @@ const conservationController = {
           return res.status(200).json(data)
           
         } )
+
+
       } catch (error) {
         console.log(error);
         return res.status(500).json(error)

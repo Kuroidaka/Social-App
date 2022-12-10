@@ -12,6 +12,11 @@ const userApi = {
     get: (params) => {
         const url = '/user/getUser/'
         return axiosClient.get(url, {params}) 
+    },
+    edit: (data, userId) => {
+        const url = '/user/updateInfo'
+    
+        return axiosClient.post(url, data, {userId})
     }
    
 
