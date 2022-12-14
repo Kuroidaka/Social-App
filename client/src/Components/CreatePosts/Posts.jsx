@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import './post.css'
 
-const   Posts = (props) => {
+const Posts = (props) => {
     const { setModalPost , user } = props
 
     const currentUser = useSelector(state => state.auth.login?.currentUser)
@@ -22,11 +22,11 @@ const   Posts = (props) => {
                     <div className="posts-input-header">
                         
                         <div className="po sts-avatar-wrapper">
-                            <img className="posts-avatar" src={currentUser.info.avatarUrl} alt="avatar" />
+                            <img className="posts-avatar" src={currentUser?.info?.avatarUrl} alt="avatar" />
                         </div>
 
                         <div className="posts-input-content" onClick={handleInputClick}>
-                            <p className="posts-input" >{`Hey ${currentUser.info.name}, Wanna post something?`}</p>
+                            <p className="posts-input" >{`Hey ${currentUser?.info?.name}, Wanna post something?`}</p>
                         </div>
 
                     </div>

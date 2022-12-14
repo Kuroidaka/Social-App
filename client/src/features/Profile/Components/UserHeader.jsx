@@ -2,7 +2,7 @@
 import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { createChat } from '../../../redux/requestApi'
@@ -15,12 +15,14 @@ function Header(props) {
     const { edit, setEdit, user } = props
     const currentUser = useSelector(state => state.auth?.login?.currentUser)
     // const [conservation, setConservation] = useState('')
+    const {id} = useParams()
     const dispatch = useDispatch()
 
 
     const navigate = useNavigate()
     let ownUser = true
-    if(currentUser?._id !== user?._id) {
+    if(currentUser._id !== id) {
+     
       ownUser = false
     }
     const handleClickEdit = () => {
@@ -85,9 +87,9 @@ function Header(props) {
       </div>
 
 
-      { currentUser?._id === user?._id 
-      ? <UserAbout user={currentUser}/>
-      : <UserAbout user={user}/>}
+
+
+      <UserAbout user={user}/>
 
     </header>
   )

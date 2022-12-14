@@ -4,21 +4,11 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState: {
         login: {
-            isFetching: false,
-            isError: false,
-            isSuccess: false,
             currentUser: null,
         },
         user: {
-            isFetching: false,
-            isError: false,
             getUser: null
         },
-        logOut: {
-            isFetching: false,
-            isError: false,
-        }
-        
 
        
     },

@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import userReducer from './userSlice'
 import authReducer from './authSlice'
 import postReducer from './postSlice'
+import loadReducer from './loadSlice'
 import conservationReducer from './conservationSlice'
 import {
     persistStore,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
     auth: authReducer, 
     user: userReducer,
     post: postReducer,
+    load: loadReducer,
     con: conservationReducer
 })
 

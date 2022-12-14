@@ -7,7 +7,7 @@ import { ReduxDeletePost } from '../../../redux/requestApi'
 import './PostOption.css'
 
 const PostOption = (props) => {
-    const { setModalOption, post, setPosts } = props
+    const { setModalOption, post } = props
     const user = useSelector(state => state.auth?.login?.currentUser)
     const dispatch = useDispatch()
 
@@ -16,7 +16,7 @@ const PostOption = (props) => {
            
         await axios.delete(`/post/deletePost/${user._id}/${post._id}/${post.userId._id}`)
             .then(() => {
-                setPosts(prev => prev.filter(target => post._id !== target._id) )
+                // setPosts(prev => prev.filter(target => post._id !== target._id) )
                 ReduxDeletePost(dispatch, post._id)
                 setModalOption(false)
             })

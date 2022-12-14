@@ -7,6 +7,7 @@ import Home from './features/Home/pages/Home';
 // import Profile from './features/Profile/pages/Profile';
 import AuthPage from './features/Login/pages/AuthPage';
 import HeaderLayout from './layouts/HeaderLogged/main';
+import Load from './Components/Load/Load';
 const Profile = lazy(() => import ('./features/Profile/pages/Profile'))
 // import { Socket } from './services/socket';
 
@@ -20,10 +21,10 @@ function App() {
         <div className='App'>
             <Routes> 
               <Route index path='/login' element={<AuthPage/>} />
-              <Route path='/' element={<HeaderLayout><Home /></HeaderLayout>} />
+              <Route path='/' element={<HeaderLayout  ><Home /></HeaderLayout>} />
               <Route path='/chat' element={<HeaderLayout><Chat /></HeaderLayout>} />
               <Route path='/Profile/:id' element={
-               <Suspense fallback = 'Loading...'>
+               <Suspense fallback = {<Load />}>
                   <HeaderLayout>
                     <Profile />
                   </HeaderLayout>

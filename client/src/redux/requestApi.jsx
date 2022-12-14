@@ -12,11 +12,12 @@ import {
         setCurrentProfileUserSuccess } from './userSlice'
 import {createCon, setCurChatUser} from './conservationSlice'
         
+import { setLoad } from './loadSlice'
 
 import axios from 'axios'
 
-export const updateUserInfo = async (userUpdated, dispatch) => {
-    dispatch(updateUserSuccess(userUpdated))
+export const reduxUpdateUserInfo = async (data, dispatch) => {
+    dispatch(updateUserSuccess(data))
 }
 
 export const login = async (data, dispatch, navigate) => {
@@ -41,20 +42,9 @@ export const setCurrentProfileUser = async (dispatch, navigate, userId) => {
     navigate(`/Profile/${userId}`)
 }
 // POST 
-export const ReduxAddPost = async (dispatch, res) => {
-
-
-    // const resFile = await axios.post(`/file/upload/`, formData, {
-    //     headers: {
-    //         'Content-Type': 'multipart/form-data'
-    //     }
-    // })
-    // newPost = { ...newPost, imgUrl: resFile.data }
-        
-    // await axios.post('/post/createPost/', newPost)
-    
-        dispatch(addPost(res.data))
-    
+export const ReduxAddPost = async (dispatch, res) => {    
+    // console.log(res);
+   dispatch(addPost(res))
 }
 
 export const ReduxStorePost = async (dispatch, posts) => {
@@ -112,3 +102,10 @@ export const setCurChat = async (dispatch, user) => {
 
 }
 
+
+
+// loading
+
+export const reduxSetLoad = (dispatch, bool) => {
+    dispatch(setLoad(bool))
+}

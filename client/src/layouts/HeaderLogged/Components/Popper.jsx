@@ -16,11 +16,11 @@ const cx = classNames.bind(styles)
 const Popper = (props) => {
     const { setPopper } = props
     const currentUser = useSelector(state => state.auth.login.currentUser)
-    const accessToken = currentUser?.accessToken
+    // const accessToken = currentUser?.accessToken
     const id = currentUser?._id
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
+    // console.log('current user in popper: ', currentUser);
     const handleLogOut = async (e) => {
         e.preventDefault()
         
@@ -33,9 +33,11 @@ const Popper = (props) => {
 
     return ( 
         <div className={cx("popper")}>
+
+
             <Link to={`/Profile/${id}`} className={cx("popper-item")} onClick={() => setPopper(false)} >
                 <div className={cx("popper-item-icon-wrapper")}>
-                   <Avatar src={currentUser.info.avatarUrl} width='35px'/>
+                <Avatar src={currentUser.info.avatarUrl} width='35px'/>
                 </div>
                 <div className={cx("popper-item-content")}><strong>{currentUser.info.name || currentUser.info.username}</strong></div>
             </Link>

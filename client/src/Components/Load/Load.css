@@ -1,5 +1,4 @@
 .page-loading{
-    // background-color: rgb(0 0 0 / 40%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,11 +6,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: 100vw;
+    width: 100%;
     position: relative;
-    height: 100vh;
+    height: 100%;
     z-index: 99;
 }
+
 .lds-ellipsis {
     display: inline-block;
     position: relative;
@@ -24,9 +24,11 @@
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    background: #cef;
+    background: #65ccff;
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
+
+
   .lds-ellipsis div:nth-child(1) {
     left: 8px;
     animation: lds-ellipsis1 0.6s infinite;

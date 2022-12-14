@@ -11,7 +11,7 @@ import './PubPosts.css'
 
 
 const PubPost = (props) => {
-    const { post, posts, setPosts } = props
+    const { post } = props
     const [modalOption, setModalOption] = useState(false)
     // const [post, setpost] = useState(post)
     const currentUser = useSelector(state => state.auth.login?.currentUser )
@@ -88,7 +88,7 @@ const PubPost = (props) => {
 
         <div className="PubPost">
 
-        { modalOption && <PostOption post={post} posts={posts} setPosts={setPosts} setModalOption={setModalOption} />}
+        { modalOption && <PostOption post={post} setModalOption={setModalOption} />}
             <header className="PubPost_header">
                 <Link to={`/Profile/${post?.userId._id}`} onClick={handleUserClick} className="PubPost_header-user-info" >
                     <img className="PubPost_header-avatar" src={post?.userId?.info?.avatarUrl} alt='avatar'/>

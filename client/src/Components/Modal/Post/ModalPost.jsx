@@ -13,7 +13,7 @@ import fileApi from '../../../api/fileApi'
 
 
 const ModalPost = (props) => { 
-    const { setModalPost} = props
+    const { setModalPost } = props
     const [importImg, setImportImg] = useState(false)
     const currentUser  = useSelector(state => state.auth.login.currentUser)
     const userId = currentUser?._id
@@ -44,14 +44,15 @@ const ModalPost = (props) => {
         let newPost = {
             userId: userId,
             postText: postText,
-            imgUrl: resFile.data,
-
+            imgUrl: resFile.data
         }
 
         await postApi.post(newPost)
         .then((res) => {
+            console.log(res);
             ReduxAddPost(dispatch, res)
         })
+        .then()
       
     }
 

@@ -3,7 +3,7 @@ import axiosClient from "./axiosClient";
 const postApi = {
     getAll: () => {
         const url = '/post/getAll'
-        
+
         return axiosClient.get(url)
     },
     getById: (id) => {
@@ -15,7 +15,6 @@ const postApi = {
         const url = '/post/createPost/'
         return axiosClient.post(url, newPost)
     }
-    
 }
 
 export default postApi

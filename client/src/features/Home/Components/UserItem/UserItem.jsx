@@ -2,6 +2,7 @@ import Avatar from "../../../../Components/Avatar/Avatar";
 import classNames from "classnames/bind";
 
 import styles from './UserItem.module.scss'
+import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles)
 
@@ -9,7 +10,7 @@ const UserItem = (props) => {
     const { user } = props
 
     return ( 
-        <a href={`/Profile/${user._id}`} className={cx("item")}>
+        <Link to={`/Profile/${user._id}`} className={cx("item")}>
             <div className={cx("item-info")}>
                 <Avatar
                     src={user.info.avatarUrl} 
@@ -21,7 +22,7 @@ const UserItem = (props) => {
 
         <div className={cx("follow-btn")}><strong>Follow</strong></div>
 
-    </a>
+    </Link>
 
      );
 }

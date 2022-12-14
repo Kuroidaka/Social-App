@@ -15,15 +15,17 @@ const cx = classNames.bind(styles)
 const HLoggedIn = () => {
     const user = useSelector(state => state.auth.login?.currentUser)
     const [popper, setPopper] = useState(false)
-
-    const handleClickHome = () => {
-        console.log(123);
-    }
-
+    // const [value, setValue] = useState();
+    
+    // const refresh = ()=>{
+    //     // it re-renders the component
+    //    setValue({});
+    // }
+    // console.log('rerender');
     return (
         <div className={cx("bar")}>
             <div className={cx("logo")}>
-                <Link to="/" className={cx("logo-link")} onClick={handleClickHome} style={{letterSpacing: '3px'}}>Home</Link>
+                <Link to="/" className={cx("logo-link")} style={{letterSpacing: '3px'}}>Home</Link>
             </div>
 
             <SearchBar />
@@ -31,7 +33,7 @@ const HLoggedIn = () => {
            <div className={cx('user-wrapper')}>
                 <div className={cx("interact-box")} style={{ marginRight:'10px'}}>
                     <Interaction /> 
-                </div>
+                </div>  
     
                <Tippy 
                 visible = {popper}

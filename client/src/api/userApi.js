@@ -16,7 +16,10 @@ const userApi = {
     edit: (data, userId) => {
         const url = '/user/updateInfo'
     
-        return axiosClient.post(url, data, {userId})
+        return axiosClient.post(url, data, {
+            params: {
+                userId: userId
+        }})
     }
    
 

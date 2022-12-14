@@ -4,16 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import './edit.css'
-import { updateUserInfo } from '../../../redux/requestApi'
+import { reduxUpdateUserInfo, reduxSetLoad } from '../../../redux/requestApi'
 import Input from '../../InputInfo/Input'
 // import { UserContext } from '../../../Context'
 import userApi from '../../../api/userApi'
 
 
 function EditModal(props) {
-  const {check, setCheck, setEdit, setLoad } = props
+  const { setEdit } = props
   // const { user } = useContext(UserContext)
   const currentUser = useSelector(state => state.auth.login.currentUser)
+  const load = useSelector(state => state.load.loading)
   const [selectIdx, setSelectIdx] = useState('')
   const picColorRef = useRef()
   const dispatch = useDispatch()
@@ -23,7 +24,6 @@ function EditModal(props) {
   const [about, setAbout] = useState('')
   const [avaUrl, setAvaUrl] = useState('')
   const [theme, setTheme] = useState('')
-
   const avatarUrl = [
     'https://www.pngarts.com/files/11/Avatar-PNG-Pic.png',
     'https://www.pngarts.com/files/11/Avatar-Transparent-Image.png',
@@ -42,7 +42,6 @@ function EditModal(props) {
 
   const handleClickPic = (e, index) => {
     // e.target.parentElement.style.backgroundColor = '#6f5353'
-
     setSelectIdx(index)
     setAvaUrl(e.target.src)
     // console.log(selectIdx, index);
@@ -53,24 +52,36 @@ function EditModal(props) {
   }
 
   const handleSubmit = async (e) => {
-    // e.preventDefault()
-    setEdit(false)
-    setLoad(true)
-    const userUpdated = {
-      name: name,
-      liveIn: liveIn,
-      comeFrom: comeFrom,
-      about: about,
-      avatarUrl: avaUrl,
-      theme: theme,
-      userId: currentUser._id
-    }
-    const userId = currentUser._id
+    e.preventDefault()
 
-    await userApi.edit( userUpdated, userId)
-    .then(() => {updateUserInfo(userUpdated, dispatch)})
-    .then(() => {setCheck(!check); setLoad(false)})
-    .catch((error)=> {console.log(error); setLoad(false)})
+    console.log(avaUrl);
+  
+
+    const newUser = {
+      name: name || currentUser.info.name,
+      liveIn: liveIn || currentUser.info.liveIn ,
+      comeFrom: comeFrom || currentUser.info.comeFrom,
+      about: about || currentUser.info.about,
+      avatarUrl: avaUrl || currentUser.info.avatarUrl ,
+      theme: theme || currentUser.info.theme ,
+    }
+    
+    // console.log('newUser: ', newUser);
+    
+
+    const userId = currentUser._id
+    reduxSetLoad(dispatch, true)
+    try {
+      await userApi.edit(newUser, userId)
+      .then(data => { reduxUpdateUserInfo(data, dispatch)})
+      
+      .then(() => {reduxSetLoad(dispatch, false)})
+    } catch (error) {
+      console.log(error); 
+      reduxSetLoad(dispatch, false)
+    }
+  
+    setEdit(false)
 
   }
 

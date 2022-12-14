@@ -7,10 +7,14 @@ export const postSlice = createSlice({
     },
     reducers: {
         storePost(state, action){
-            state.posts = [action.payload]
+            state.posts = action.payload
         },
         addPost(state, action){
-            state.posts = [...state.posts, action.payload]
+            // let tmp = [...state.posts]
+            // tmp.push(action.payload)
+            // state.posts = [...tmp]
+            state.posts.unshift(action.payload)
+
         },
         deletePost(state, action){
             state.posts = state.posts.filter( post => post._id !== action.payload )
