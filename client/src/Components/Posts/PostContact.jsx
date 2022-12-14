@@ -4,7 +4,7 @@ import { faComment, faHeart as Heart } from '@fortawesome/free-regular-svg-icons
 import {faHeart as HeartClicked } from '@fortawesome/free-solid-svg-icons';
 import classNames from "classnames/bind";
 
-import styles from './PostContact.module.scss'
+import styles from './Posts.module.scss'
 import axios from "axios";
 import { useSelector } from "react-redux";
 
@@ -28,21 +28,23 @@ const PostContact = (props) => {
 
     return( 
           <Fragment>
-            <div className="PubPost_footer-icon-block">
+            <div className={cx("PubPost_footer-icon-block")}>
                 <FontAwesomeIcon 
-                    className={`PubPost_footer-icon heart ${heartClick && 'active'}`} 
+                    className={cx('PubPost_footer-icon')}
+                    style={  heartClick && { color: '#ED4956' } }
                     onClick={handleHeartClick} 
                     icon={heartClick? HeartClicked : Heart} />
 
-                <FontAwesomeIcon className="PubPost_footer-icon comment" icon={faComment} />
+                <FontAwesomeIcon className={cx("PubPost_footer-icon")} icon={faComment} />
             </div>
 
             <div className={cx("like-count")}>{likeCount} Likes</div>
 
-            <div className="PubPost_footer-comment-block-wrapper">
-                    <div className="PubPost_footer-comment-block">
-                            <input type="text" placeholder='Add comment here...' className="PubPost_footer-comment-input" />
-                        <button className="PubPost_footer-comment-btn">Post</button>
+            <div className={cx("PubPost_footer-comment-block-wrapper")}>
+                    <div className={cx("PubPost_footer-comment-block")}>
+                            <input type="text" placeholder='Add comment here...' 
+                            className={cx("PubPost_footer-comment-input")} />
+                        <button className={cx("PubPost_footer-comment-btn")}>Post</button>
                     </div>
                 </div>
           </Fragment>

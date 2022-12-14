@@ -21,7 +21,7 @@ function App() {
         <div className='App'>
             <Routes> 
               <Route index path='/login' element={<AuthPage/>} />
-              <Route path='/' element={<HeaderLayout  ><Home /></HeaderLayout>} />
+              <Route path='/' element={<HeaderLayout><Home /></HeaderLayout>} />
               <Route path='/chat' element={<HeaderLayout><Chat /></HeaderLayout>} />
               <Route path='/Profile/:id' element={
                <Suspense fallback = {<Load />}>

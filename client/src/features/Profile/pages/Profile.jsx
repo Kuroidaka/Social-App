@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 import ModalPost from '../../../Components/Modal/Post/ModalPost';
 import EditModal from '../../../Components/Modal/Edit/EditModal'
 import Header from '../Components/UserHeader';
-import Posts from '../../../Components/CreatePosts/Posts';
+import CreatePosts from '../../../Components/CreatePosts/CreatePosts';
 // import ProfileNewFeed from '../Components/ProfileNewFeed';
 
 import postApi from '../../../api/postApi'
@@ -61,7 +61,7 @@ const Profile = (props) => {
 
                 <div className={cx('grid')}>
                     {modalPost && <ModalPost setModalPost={setModalPost}/>}
-                    <Posts setModalPost={setModalPost} user={user}/>
+                    <CreatePosts setModalPost={setModalPost} user={user}/>
                     <Suspense fallback={<Load />}>
                         <ProfileNewFeed user={user}/>
                     </Suspense>

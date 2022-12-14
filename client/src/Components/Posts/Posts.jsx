@@ -3,14 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
 import { Link, useNavigate } from 'react-router-dom'
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames/bind';
 
 import { setCurrentProfileUser } from '../../redux/requestApi'
 import PostOption from '../Modal/PostOption/PostOption';
-import PostContact from './PostContact/PostContact';
-import './PubPosts.css'
+import PostContact from './PostContact';
+import styles from './Posts.module.scss'
+import LazyLoad from '../LazyLoad/LazyImg';
 
+const cx = classNames.bind(styles)
 
-const PubPost = (props) => {
+const Post = (props) => {
     const { post } = props
     const [modalOption, setModalOption] = useState(false)
     // const [post, setpost] = useState(post)
@@ -84,23 +87,31 @@ const PubPost = (props) => {
     //     // }
     // }, [post])
 
+    const image = {
+        width: '100%',
+        height: '506px',
+        key: post._id,
+        alt: post.imgUrl,
+        src: post.imgUrl,
+    }
+
     return ( 
 
-        <div className="PubPost">
+        <div className={cx("PubPost")}>
 
         { modalOption && <PostOption post={post} setModalOption={setModalOption} />}
-            <header className="PubPost_header">
-                <Link to={`/Profile/${post?.userId._id}`} onClick={handleUserClick} className="PubPost_header-user-info" >
-                    <img className="PubPost_header-avatar" src={post?.userId?.info?.avatarUrl} alt='avatar'/>
-                    <div className="PubPost_header-name-wrapper">
-                        <p className="PubPost_header-name">{post?.userId?.info?.name}</p>
-                        <div className="PubPost_header-timer">{timer}</div>
+            <header className={cx("PubPost_header")}>
+                <Link to={`/Profile/${post?.userId._id}`} onClick={handleUserClick} className={cx("PubPost_header-user-info")} >
+                    <img className={cx("PubPost_header-avatar")} src={post?.userId?.info?.avatarUrl} alt='avatar'/>
+                    <div className={cx("PubPost_header-name-wrapper")}>
+                        <p className={cx("PubPost_header-name")}>{post?.userId?.info?.name}</p>
+                        <div className={cx("PubPost_header-timer")}>{timer}</div>
                     </div>
                 </Link>
                 
             {currentUser?._id === post?.userId._id && 
                 <FontAwesomeIcon 
-                    className='PubPost_header-option-icon' 
+                    className={cx('PubPost_header-option-icon' )}
                     icon={faEllipsis} 
                     onClick={handleOptionClick}
                 />
@@ -108,15 +119,18 @@ const PubPost = (props) => {
             </header>
 
             {post.postText && 
-                <div className="PubPost_footer-des-block">
-                    <p className="PubPost_footer-des">
+                <div className={cx("PubPost_footer-des-block")}>
+                    <p className={cx("PubPost_footer-des")}>
                         {post.postText}
                     </p>
                 </div>
                 }
-             {post.imgUrl && <img src={post.imgUrl} alt="" className="PubPost_content-img" />}
+             
+             {post.imgUrl && <LazyLoad image={image} />}
+             
+              {/* <img src={post.imgUrl} alt="" className={cx("PubPost_content-img")} /> */}
 
-            <div className='PubPost_footer'>
+            <div className={cx('PubPost_footer')}>
                     <PostContact post={post}/>
             </div>
 
@@ -125,4 +139,4 @@ const PubPost = (props) => {
     );
 }
  
-export default PubPost;
+export default Post;

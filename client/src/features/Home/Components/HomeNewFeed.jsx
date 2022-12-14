@@ -4,7 +4,7 @@ import Load from "../../../Components/Load/Load"
 // import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 // import PubPost from "../../../Components/PubPosts/PubPosts"
-const PubPost = lazy(() => import ("../../../Components/PubPosts/PubPosts")) 
+const Post = lazy(() => import ("../../../Components/Posts/Posts")) 
 // import { ReduxStorePost } from "../../redux/requestApi"
 
 
@@ -14,19 +14,19 @@ const HomeNewFeed = (props) => {
     const reduxPosts = useSelector(state => state.post.posts)
     console.log(reduxPosts);
     return (
-       <div>
+       <>
            {reduxPosts &&
             reduxPosts.map((post) => {
                 return (
-                    post && <Suspense fallback={<Load />}>
-                                <PubPost key={post._id} post={post} />
+                    post && <Suspense key={post._id} fallback={<Load />}>
+                                <Post post={post} />
                             </Suspense>
                 )
             })
         
             }
             
-       </div>
+       </>
     )
 }
  

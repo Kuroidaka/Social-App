@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
-import PubPost from "../../../Components/PubPosts/PubPosts"
+import Post from "../../../Components/Posts/Posts"
 // import { ReduxStorePost } from "../../redux/requestApi"
 
 
@@ -25,7 +25,7 @@ const ProfileNewFeed = (props) => {
            {
             reduxPosts.map((post) => {
                 return (
-                    post && <PubPost key={post._id} post={post} /> 
+                    post && <Post key={post._id} post={post} /> 
                 )
             })
         

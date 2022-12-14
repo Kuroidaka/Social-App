@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
-import './post.css'
+import './CreatePosts.css'
 
-const Posts = (props) => {
+const CreatePosts = (props) => {
     const { setModalPost , user } = props
 
     const currentUser = useSelector(state => state.auth.login?.currentUser)
@@ -36,4 +36,4 @@ const Posts = (props) => {
      );
 }
  
-export default Posts;
+export default CreatePosts;

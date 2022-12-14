@@ -1,19 +1,16 @@
-import classNames from 'classnames/bind';
-
-import styles from './Avatar.module.scss'
-
-const cx = classNames.bind(styles)
+import LazyLoad from '../LazyLoad/LazyImg';
 
 const Avatar = (props) => {
-    const { src, classStyles, width, alt } = props
+    const { src, width, alt, styles } = props
 
-    const className = cx('avatar', {
-        [classStyles] : classStyles
-    })
+    const image = {
+        alt: alt,
+        src: src,
+        width: width,
+        styles: styles
+    }
 
-    return (    
-            <img src={src} style={{width: width}} className={className} alt={alt} />
-    );
+    return <LazyLoad image={image}/>
 }
  
 export default Avatar;
