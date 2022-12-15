@@ -5,15 +5,23 @@ const Post = require('../models/posts')
 const postControllers = {
     createPost: async (req, res) => {
         try{
-            const newPost = await new Post({
+
+            // const userInfo = User.findById( req.body.userId )
+
+            // console.log(userInfo);
+            // res.status(200).json(userInfo)
+            const newPost = new Post({
+                userId: req.body.userId,
                 postText: req.body.postText,
-                userId: req.params.userId,
-                name: req.body.name,
-                avatarUrl: req.body.avatarUrl,
-                imgUrl: req.body.imgUrl
+                imgUrl: req.body.imgUrl,
             })  
             const post = await newPost.save()
-            res.status(200).json(post)
+
+            await Post.findById(post._id)
+            .populate('userId')
+            .then(data => {
+                return res.status(200).json(data)
+            })
         }
         catch(error){
             res.status(500).json(error)
@@ -31,17 +39,25 @@ const postControllers = {
     },
     getAllPost: async(req, res) =>{
         try {
-            const newPosts = await Post.find()
-            res.status(200).json(newPosts)
+            await Post.find()
+            .populate('userId')
+            .then(data => {
+                res.status(200).json(data)
+            })
+           
 
         } catch (error) {
             console.log(error);
         }
     },
-    getByUser: async(req, res) =>{
+    getById: async(req, res) =>{
+        console.log(req.params);
         try {
-            const newPosts = await Post.find({userId: req.params.userId})
-            res.status(200).json(newPosts)
+            await Post.find({userId: req.params.userId})
+            .populate('userId')
+            .then(data => {
+                res.status(200).json(data)
+            })
 
         } catch (error) {
             console.log(error);
@@ -54,7 +70,7 @@ const postControllers = {
                     {
                         '$set':{'like': req.query.count},
                         '$addToSet':{'userLike': req.query.userId } 
-                    } 
+                    }
                 )
             res.status(200).json(post)
         } catch (error) {

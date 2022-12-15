@@ -12,7 +12,6 @@ const routes = require('./routes/index')
 const app = express()
 
 connect();
-
 app.use(
     bodyParser.urlencoded({
         extended: true,

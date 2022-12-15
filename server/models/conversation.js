@@ -3,7 +3,7 @@ const User = require('./users')
 
 const { Schema } = mongoose
 
-const Conversations = new Schema ({
+const Conversation = new Schema ({
     member: [
         {   
             _id: {
@@ -20,4 +20,4 @@ const Conversations = new Schema ({
 }
 )
 
-module.exports = mongoose.model('Conversations', Conversations)
+module.exports = mongoose.model('Conversation', Conversation)

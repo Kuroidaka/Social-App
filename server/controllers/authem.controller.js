@@ -47,7 +47,7 @@ const authemControllers = {
 
             // save db
             const user = await newUser.save()
-            res.status(200).send(user)
+            res.status(200).json(user)
 
         }catch(error){
             res.status(500).json(error)

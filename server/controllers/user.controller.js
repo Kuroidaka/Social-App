@@ -12,7 +12,8 @@ const userController = {
     },
     getUser: async (req, res) => {
         try{
-            const user = await User.findById(req.query.userId)
+            const id = req.query.userId
+            const user = await User.findById(id)
             return res.status(200).json(user)
 
         }
@@ -31,10 +32,9 @@ const userController = {
         }
     },
     updateInfo: async(req, res) => {
-        
         try{    
-            // const userInfo = await new User.info
-            const info ={
+
+            const info =  {
                 name: req.body.name,
                 liveIn: req.body.liveIn,
                 comeFrom: req.body.comeFrom, 
@@ -42,15 +42,24 @@ const userController = {
                 avatarUrl: req.body.avatarUrl,
                 theme: req.body.theme,  
             }
+            await User.updateOne(
+                {
+                    '_id' : req.query.userId
+                }, 
+                {
+                    '$set': { 
+                        'info.name': info.name,
+                        'info.liveIn': info.liveIn,
+                        'info.comeFrom': info.comeFrom,
+                        'info.about': info.about,
+                        'info.avatarUrl': info.avatarUrl,
+                        'info.theme': info.theme,
 
-            const user = await User.findByIdAndUpdate(req.params.userId, 
-            {info: info},
-            {
-                new: true,
-                upsert: true // Make this update into an upsert
-            })
-            return res.status(200).json(user)
-            
+                    }
+                    
+                })
+
+            await userController.getUser(req, res)
         }
         catch(error){
             return res.status(500).json(error)
