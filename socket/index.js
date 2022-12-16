@@ -4,23 +4,52 @@ const io = require('socket.io')(8900, {
     }
 })
 
+global.userOnline = new Map()
+
+
+io.use(function(socket, next){
+    // return the result of next() to accept the connection.
+    
+    if (socket.handshake.auth.currentUser) {
+        const id = socket.handshake.auth.currentUser._id
+
+        console.log('-----CONNECT INFO------');
+        console.log('user connect:', socket.id);
+        userOnline.set(id, socket.id)
+        console.log('user online: ',userOnline.size);
+        console.log('-----------------');
+        return next();
+    }
+    else {
+        console.log('user online', userOnline.size);
+    }
+    // call next() with an Error if you need to reject the connection.
+    next(new Error('Authentication error'));
+});
+
+
 io.on("connection", socket => { 
 
-    console.log('user connected');
-    // socket.on('send_mes', mes =>{
-    //     socket.emit('receive_mes', mes)
-    // })
+    
+    socket.on('logout', (currentUser) => {
+        console.log('-----DISCONNECT INFO------');
+        console.log('user disconnected on logout', socket.id);
+        socket.disconnect();
+        console.log('--------------------------');
+    })
 
-    // socket.on('join_room', (data) => {
-    //     socket.join(data)
-    //     console.log('user join room: ', data);
-    // })
-
-    socket.on('forceDisconnect', () => {
-        console.log('User disconnect');
+    socket.on('disconnecting', () => {
+        console.log('-----DISCONNECT INFO------');
+        console.log('user disconnecting on close tab', socket.id);
+        userOnline.forEach(function (item, key) { 
+            if(item === socket.id)
+            userOnline.delete(key)
+        }); 
+        console.log('user online after delete: ', userOnline.size);
+        console.log('--------------------------');
     })
 
     socket.on('disconnect', () => {
-        console.log('User disconnect');
+        console.log('user disconnected');
     })
  });
