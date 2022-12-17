@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 const User = require('./users')
-
+const Chat = require('./chat')
 const { Schema } = mongoose
 
 const Conversation = new Schema ({
+    lastMes: {type: String, ref: 'Chat' },
     member: [
         {   
             _id: {

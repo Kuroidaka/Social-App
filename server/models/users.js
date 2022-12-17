@@ -13,6 +13,7 @@ const User = new Schema ({
         avatarUrl: {type: String, default: 'https://www.pngitem.com/pimgs/m/421-4212617_person-placeholder-image-transparent-hd-png-download.png'},
         theme:     {type: String, default: '#fafafa'},
     },
+    online: {type: Boolean, default: false},
     accessToken: {type: String, default: '' },
     conservation: [ 
         {

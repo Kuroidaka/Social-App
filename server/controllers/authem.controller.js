@@ -89,7 +89,11 @@ const authemControllers = {
                     sameSite: 'strict'
                 })
 
-                await User.updateOne({username: req.body.username}, {$set:{ accessToken: accessToken}})
+                await User.updateOne({username: req.body.username}, 
+                    {$set:{ 
+                        accessToken: accessToken, 
+                        online : true
+                    }})
                 
                 const newUser = await User.find({username: req.body.username})
                     // console.log(newUser[0])
@@ -102,6 +106,17 @@ const authemControllers = {
             res.status(500).json(error)
             
         }
+
+    },
+    setUserOnline: async (currentUser) => {
+        await User.updateOne({_id: currentUser._id}, {
+            '$set': { 
+                online: true
+            }
+        })
+        .then(data => {
+           return 
+        })
 
     },
     requestRefreshToken: async (req, res) => {
@@ -138,14 +153,21 @@ const authemControllers = {
             
     },
 
-    logout: async (req, res) => {
-        // const refreshToken = req.cookies.refreshToken
-        // console.log('REFRESH TOKEN IN CONTROLLER',refreshToken);
+    logout: async (req) => {        
+        // res.clearCookie('accessToken')
+        await User.updateOne({_id: req._id}, {
+            '$set': { 
+                online: false
+            }
+        })
+        .then(() => {
+           return 
+        })
 
-        res.clearCookie('accessToken')
+        
 
         //refreshTokens = refreshTokens.filter(token => token!== refreshToken)
-        res.status(200).json('logged out')
+       
     }
 
 }

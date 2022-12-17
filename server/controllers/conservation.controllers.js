@@ -5,7 +5,6 @@ const Conversation = require('../models/conversation')
 const conservationController = {
     send: async (req, res) => {
       const {sender, receive, text} = req.body
-      console.log(req.body);
       try {
         condition ={'$and': [{'member': { '$in': { '_id':  sender}}},{'member': { '$in': { '_id':  receive}}}]}
 
@@ -47,6 +46,15 @@ const conservationController = {
       }
 
     },
+    setLastMessage: async (req, res) => {
+      const { lastMes, conservationId } = req.body
+      await Conversation.updateOne(conservationId, {
+        '$set': {
+          lastMes: lastMes
+        }
+      })
+      return res.status(200)
+    },
     findConversation: async (req, res) => {
       const { sender } = req.query
       const condition = {
@@ -59,8 +67,9 @@ const conservationController = {
 
       const conversations = await Conversation.find(condition)
       // .limit(10)
-      .populate('member._id')
       .sort({'updatedAt': 'desc'})
+      .populate('member._id')
+      .populate('lastMes')
       .then(data => {
         data.forEach(con => {
           con.member = con.member.filter(data => {
@@ -69,11 +78,12 @@ const conservationController = {
         })
         return res.status(200).json(data)
       } )
+      
 
 
-      // return res.status(200).json(conversations)
 
     },
+
     getMessages: async(req, res) => {
       const { conversationId } = req.query
       console.log(conversationId);

@@ -4,6 +4,9 @@ const conservationController = require('../controllers/conservation.controllers'
 
 
 router.post('/send', conservationController.send)
+router.post('/setLastMessage', conservationController.setLastMessage)
+
+
 // Get specific user's conservation by user's ID
 router.get('/get', conservationController.getMessages)
 // Get all user's conservations
