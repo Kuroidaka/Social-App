@@ -13,6 +13,7 @@ const ChatSide = (props) => {
     const { currentChat }= props
     const socket = useContext(SocketContext)
     const [mes, setMes] = useState([])
+    const [arrivalMes, setArrivalMes] = useState(null)
     const scrollRef = useRef()
     const currentUser = useSelector(state => state.auth.login.currentUser)
 
@@ -32,18 +33,21 @@ const ChatSide = (props) => {
     }, [currentChat])
 
     useEffect(() => {
+        arrivalMes && setMes(prev => [...prev, arrivalMes])
+
+    }, [arrivalMes])
+
+    useEffect(() => {
         if(socket.current){
             socket.current.on('receive-msg', data => {
-                const newMes = [...mes]
-                // console.log(newMes);
-                newMes.push({
+                const newMes = {
                     sender: data.sender,
                     message: {
                         text: data.text, 
                     }
-                })
+                }
                 // const result = mes.push(newData)
-                setMes(newMes)
+                setArrivalMes(newMes)
 
             })
         }
