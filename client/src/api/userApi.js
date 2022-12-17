@@ -7,7 +7,8 @@ const userApi = {
         return axiosClient.get(url, { params }) 
     },
     getAll: (params) => {
-        const url = ''
+        const url = '/user/getAll'
+        return axiosClient.get(url)
     },
     get: (params) => {
         const url = '/user/getUser/'
@@ -20,6 +21,11 @@ const userApi = {
             params: {
                 userId: userId
         }})
+    },
+    search: (params) => {
+        const url = '/user/search'
+        
+        return axiosClient.get(url, {params})
     }
    
 

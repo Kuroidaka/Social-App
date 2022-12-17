@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 import SearchBar from '../../../Components/SearchBar/SearchBar';
 import Popper from './Popper';
 import Interaction from '../../../Components/Interaction/Interation';
-import styles from '../Styles/LoggedIn.module.scss'
+import styles from './HLoggedIn.module.scss'
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles)

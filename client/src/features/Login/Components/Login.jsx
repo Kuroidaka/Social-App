@@ -3,6 +3,8 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
+
+
 import { login } from "../../../redux/requestApi"
 import authApi from '../../../api/authApi'
 import Button from "../../../Components/Button/Button"
@@ -10,6 +12,8 @@ import InputBar from "../../../Components/InputBar/InputBar"
 import styles from '../Login.module.scss'
 
 const cx = classNames.bind(styles)
+
+
 
 const LoginPage = (props) => {
     const {log, setLog, setLoad, state, setState}= props
@@ -69,7 +73,7 @@ const LoginPage = (props) => {
                 <div className={cx("register-zone")}>
                   Not a member?
                   <div className={cx("sign_up-btn")} 
-                    onClick={()=> {setLog(!log)}} >Sign up now</div>
+                    onClick={()=> {setLog('register')}} >Sign up now</div>
                 </div>
                
             </form>

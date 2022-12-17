@@ -8,6 +8,7 @@ const LazyLoad = (props) => {
     const {image} = props
     return ( 
              <LazyLoadImage
+
             key={image.key}
             alt={image.alt}
             src={image.src}
@@ -19,7 +20,7 @@ const LazyLoad = (props) => {
                 objectPosition: 'center',
                 ...image.styles
             }}
-            // placeholder={<Load/>}
+            placeholderSrc={image.src}
             // scrollPosition={scrollPosition}
             // If the image we are creating here has the same src than before,
             // we can directly display it with no need to lazy-load.

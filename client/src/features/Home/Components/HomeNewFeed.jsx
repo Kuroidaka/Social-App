@@ -12,7 +12,6 @@ const HomeNewFeed = (props) => {
     const { posts  } = props
 
     const reduxPosts = useSelector(state => state.post.posts)
-    console.log(reduxPosts);
     return (
        <>
            {reduxPosts &&

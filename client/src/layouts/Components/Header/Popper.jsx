@@ -9,25 +9,31 @@ import authApi from '../../../api/authApi'
 import Avatar from '../../../Components/Avatar/Avatar';
 import { LogOut } from "../../../redux/requestApi";
 import NavBarPopper from './NavBarPopper'
-import styles from '../Styles/Popper.module.scss'
+import styles from './Popper.module.scss'
+import { useContext } from 'react';
+import { SocketContext } from '../../../Context';
 
 const cx = classNames.bind(styles)
 
 const Popper = (props) => {
     const { setPopper } = props
+    const socket = useContext(SocketContext)
     const currentUser = useSelector(state => state.auth.login.currentUser)
-    // const accessToken = currentUser?.accessToken
     const id = currentUser?._id
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    // console.log('current user in popper: ', currentUser);
+
     const handleLogOut = async (e) => {
         e.preventDefault()
-        
-        await authApi.logout()
-        .then(() => {
-            LogOut(dispatch, navigate)
-        })
+        if(socket.current){
+            socket.current.emit('logout', currentUser)
+            // await authApi.logout(currentUser)
+            // .then(() => {
+                LogOut(dispatch, navigate)
+                socket.current.emit('logout')
+            // })
+        }
+       
         
     }
 

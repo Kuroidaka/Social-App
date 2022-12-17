@@ -7,8 +7,12 @@ const Avatar = (props) => {
         alt: alt,
         src: src,
         width: width,
-        styles: styles
+        styles: {
+            borderRadius: '100%',
+            ...styles
+        }
     }
+
 
     return <LazyLoad image={image}/>
 }

@@ -2,8 +2,8 @@ import { Navigate, redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import classNames from "classnames/bind";
 
-import HLoggedIn from "./Components/HLoggedIn";
-import styles from './HeaderLogged.module.scss'
+import HLoggedIn from "../Components/Header/HLoggedIn";
+import styles from '../Components/Header/styles.module.scss'
 
 const cx = classNames.bind(styles)
 const HeaderLayout = ({children}) => {
@@ -11,9 +11,7 @@ const HeaderLayout = ({children}) => {
 
     return currentUser ?
     <>
-        <header className={cx('main-header')}>                                  
-            {currentUser && <HLoggedIn />}
-        </header>
+        <header className={cx('main-header')}><HLoggedIn /></header>
             {children}
     </>:
     <Navigate to='/login' replace />

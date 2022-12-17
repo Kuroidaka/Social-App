@@ -23,6 +23,9 @@ const Home = (props) => {
     const dispatch = useDispatch()
     const newUserList = [...users].reverse()
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     useEffect(() => {
         AllUsers(dispatch)

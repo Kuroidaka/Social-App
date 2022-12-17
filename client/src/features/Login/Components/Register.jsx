@@ -1,6 +1,8 @@
 import classNames from "classnames/bind"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'
 
 import authApi from "../../../api/authApi"
 import Button from "../../../Components/Button/Button"
@@ -10,15 +12,26 @@ import styles from '../Login.module.scss'
 
 const cx = classNames.bind(styles)
 
+const toastOptions = {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+}
+
 const RegisterPage = (props) => {
-    const {log, setLog, setLoad}= props
+    const {log, setLog, setLoad, setRegist}= props
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const refName = useRef()
     const refUserName = useRef()
     const refPd = useRef()
-
+    
     const handleSubmitRegister = async (e) => {
         e.preventDefault()
 
@@ -41,17 +54,38 @@ const RegisterPage = (props) => {
                 password: password
             }
             await authApi.register(newUser)
-            .then(() => {
-                setLog(!log)
+            .then((data) => {
+                setLog('login')
+                setRegist(data)
                 setLoad(false)
             }) 
-            .catch(() => {setLoad(false)})
+            .catch(() => {
+                toast.error('Registration error', toastOptions)
+                setLoad(false)
+            })
        }
 
     }
 
+    
+       
+    
+
     return ( 
         <div>
+            <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
+            <ToastContainer />
             <form className={cx("Register_modal")} onSubmit={handleSubmitRegister}>
                 <header className={cx("Register_modal-header")}>
                     <h3 className={cx("Register_modal-title")}>Register</h3>
@@ -85,7 +119,7 @@ const RegisterPage = (props) => {
                 <div className={cx("register-zone")}>
                   Have already an account?
                   <div className={cx("sign_up-btn")} 
-                  onClick={()=> {setLog(!log)}}>Login here</div>
+                  onClick={()=> {setLog('login')}}>Login here</div>
                 </div>
 
             </form>

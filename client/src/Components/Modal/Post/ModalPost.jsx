@@ -52,7 +52,7 @@ const ModalPost = (props) => {
             console.log(res);
             ReduxAddPost(dispatch, res)
         })
-        .then()
+
       
     }
 
@@ -76,16 +76,14 @@ return (
             <div className="modal_content">
                 <div className="modal-input-area">
                     <textarea type="text" spellCheck={false} placeholder='What are you thinking?' className="modal_content-input" onChange={(e) => setPostText(e.target.value)} />
-                    { importImg &&  <PostImg 
-                                    setPostImg={setImgUrl}
-                                    setImportImg={setImportImg} 
-                                  />
-                    }
                 </div>
-
-                
+                { importImg &&  <PostImg 
+                                setPostImg={setImgUrl}
+                                setImportImg={setImportImg} 
+                                />
+                }
             </div>
-
+                
             {/* footer */}
             <footer className='modal-post-footer'>
                 <div className="modal_content-icon">

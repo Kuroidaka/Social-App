@@ -17,7 +17,7 @@ const ProfileNewFeed = (props) => {
     // console.log(`${user.info.name}: `, reduxPosts);
 
     useEffect(() => {
-        console.log('redux state change: ', reduxPosts);
+
     }, [reduxPosts])
 
     return (

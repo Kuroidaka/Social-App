@@ -11,10 +11,10 @@ const authApi = {
 
         return axiosClient.post(url, user)
     },
-    logout: () => {
+    logout: (currentUser) => {
         const url = '/authem/logout'
 
-        return axiosClient.post(url)
+        return axiosClient.post(url, currentUser)
     }
 }
 

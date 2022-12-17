@@ -1,50 +1,61 @@
-import classNames from 'classnames/bind';
+import { useContext } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-// import { socket } from '../../services/socket';
+import styled from 'styled-components';
 
-import styles from '../Chat.module.scss'
-// import { sendMessages } from '../../services'
-
-const cx = classNames.bind(styles)
-
+import { SocketContext } from '../../../Context';
+import chatApi from '../../../api/chatApi';
 
 const ChatInput = (props) => {
-
+    const {handleSend} = props
     const [text, setText] = useState('')
+    const socket = useContext(SocketContext)
     const currentUser = useSelector(state => state.auth.login.currentUser)
-    const curConservation = useSelector(state => state.con?.curConservation)
 
     const handleInput = (e) => {
         setText(e.target.value)
     }
 
-    const handleSend = async (e) => {
-
-        if(e.key === 'Enter'){
-            const messageData = {
-                conversationId: curConservation, 
-                senderId: currentUser._id,
-                text: text, 
-            }
+    const sendChat = (e) =>{
+        if(e.key === 'Enter' && text.trim() !== ''){
+            handleSend(text)
             setText('')
-            // sendMessages(messageData)
-            // await socket.emit('send_mes', messageData)
         }
-
     }
 
     return ( 
-        <div className={cx("input-box")}>
-            <div className={cx("input-wrapper")}>
+            <Wrap>
                 <input type="text" 
                     value={text} 
-                    className={cx("input")} 
+                    className="input" 
                     onChange={handleInput}
-                    onKeyPress={handleSend}/>
-            </div>
-        </div>
+                    onKeyPress={sendChat}
+                   />
+            </Wrap>
      );
 }
+
+const Wrap = styled.div `
+background-color: #EFEEEF;
+width: 86%;
+height: 44px;
+border-radius: 120px;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+position: relative;
+
+    input{
+        color: rgb(108 106 106);
+        border: none;
+        background-color: transparent;
+        border-radius: 120px;
+        height: 100%;
+        width: 90%;
+        outline: none;
+        padding: 15px;
+        font-size: 15px;
+    }
+`
  
 export default ChatInput;

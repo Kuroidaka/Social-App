@@ -32,8 +32,9 @@ const Profile = (props) => {
     const users = useSelector(state => state.user.allUser)
     const { id } = useParams()
 
-    // console.log('current user Id: ', currentUser._id);
-    // console.log('profile user Id: ', id);
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
     useEffect(() => {
         postApi.getById(id)

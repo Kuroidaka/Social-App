@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from 'classnames/bind';
 
-import styles from '../Styles/Popper.module.scss'
+import styles from './Popper.module.scss'
 
 const cx = classNames.bind(styles)
 
